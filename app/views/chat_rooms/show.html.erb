@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @chat_room.title %></h1>
 
-<%= link_to 'Edit', edit_chat_room_path(@chat_room) %> |
-<%= link_to 'Back', chat_rooms_path %>
+<div id="messages">
+  <%= render @chat_room.messages %>
