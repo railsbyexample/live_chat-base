@@ -1,7 +1,6 @@
-<h1>Conversations</h1>
-
-<div>
-  <%= render @conversations %>
+<div class="container">
+  <h6> Your conversations </h6>
+  <div class="list-group">
+    <%= render @conversations %>
+  </div>
 </div>
-
-<%= link_to 'New Conversation', new_conversation_path %>
