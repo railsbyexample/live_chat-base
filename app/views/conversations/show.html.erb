@@ -1,15 +1,17 @@
-<h1><%= other_user(@conversation).name %></h1>
+<div class="container">
 
-<div id="messages" data-conversation-id="<%= @conversation.id %>">
-  <%= render @conversation.messages %>
-</div>
+  <h6>Conversation with <%= other_user(@conversation).name %></h6>
 
-<%= form_for @message, url: '#' do |f| %>
-  <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class: 'form-control' %>
-    <small class="text-muted">From 2 to 1000 characters</small>
+  <div id="messages" class="list-group" data-conversation-id="<%= @conversation.id %>">
+    <%= render @conversation.messages %>
   </div>
 
-  <%= f.submit "Post", class: 'btn btn-primary btn-lg' %>
-<% end %>
+  <%= form_for @message, url: '#' do |f| %>
+    <div class="input-group">
+      <%= f.text_field :body, class: 'form-control' %>
+      <span class="input-group-btn">
+        <%= f.submit "Post", class: 'btn btn-primary' %>
+      </span>
+    </div>
+  <% end %>
+</div>
