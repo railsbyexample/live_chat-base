@@ -1,7 +1,11 @@
 <div class="container">
+
+  <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-block btn-warning mb-1" %>
+
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
     <%= devise_error_messages! %>
+
 
     <div class="form-group">
       <%= f.label :email %>
@@ -29,5 +33,5 @@
     <%= f.submit "Update", class: "btn btn-primary btn-block" %>
   <% end %>
 
-  <%= button_to "Cancel my account", registration_path(resource_name), data: true, method: :delete, class: "btn btn-primary btn-block btn-warning mt-1" %>
+  <%= button_to "Cancel my account", registration_path(resource_name), data: true, method: :delete, class: "btn btn-primary btn-block btn-danger mt-1" %>
 </div>
