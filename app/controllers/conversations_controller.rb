@@ -25,11 +25,23 @@ class ConversationsController < ApplicationController
   # POST /conversations
   # POST /conversations.json
   def create
-    @conversation = Conversation.new(conversation_params)
+
+    target_user_id = params[:conversation][:user_2_id]
+    @conversation = current_user.conversations.find do |conv|
+      conv.user_1_id.to_s == target_user_id || conv.user_2_id.to_s == target_user_id
+    end
+    found = !!@conversation
+
+    puts @conversation
+
+    @conversation ||= Conversation.new(conversation_params)
 
     respond_to do |format|
-      if @conversation.save
-        format.html { redirect_to conversations_url, notice: 'Conversation was successfully created.' }
+      if found
+        format.html { redirect_to @conversation }
+        format.json { render :show, location: @conversation }
+      elsif @conversation.save
+        format.html { redirect_to @conversation }
         format.json { render :show, status: :created, location: @conversation }
       else
         format.html { render :new }
