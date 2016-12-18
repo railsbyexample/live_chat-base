@@ -1,16 +1,4 @@
-<%= link_to conversation do%>
-  <div class="card">
-    <div class="card-block">
-      <div class="row">
-        <div class="col-md-1">
-          <%= gravatar_for other_user(conversation) %>
-        </div>
-        <div class="col-md-11">
-          <p class="card-text">
-            <strong><%= other_user(conversation).name %></strong><br>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+<%= link_to conversation, class: 'list-group-item list-group-item-action' do%>
+  <%= gravatar_for other_user(conversation) %>
+  <%= other_user(conversation).name %>
 <% end %>
