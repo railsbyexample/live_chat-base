@@ -4,11 +4,7 @@ Rails.application.routes.draw do
   resources :chat_rooms
   resources :users, only: [:index]
 
-  root 'chat_rooms#index'
-
-  get 'my_chats', to: 'conversations#chats'
-  get 'my_friends', to: 'users#friends'
-  get 'my_profile', to: 'users#profile'
+  root 'conversations#index'
 
   devise_for :users
 

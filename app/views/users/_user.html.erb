@@ -1,14 +1,21 @@
-<div class="card">
-  <div class="card-block">
-    <div class="row">
-      <div class="col-md-1">
-        <%= gravatar_for user %>
-      </div>
-      <div class="col-md-11">
-        <p class="card-text">
-          <%= user.name %>
-        </p>
+<%= form_for Conversation.new do |f| %>
+  <div class="card">
+    <div class="card-block">
+      <div class="row">
+        <div class="col-md-1">
+          <%= gravatar_for user %>
+        </div>
+        <div class="col-md-8">
+          <p class="card-text">
+            <%= user.name %>
+          </p>
+        </div>
+        <div class="col-md-8">
+          <%= f.hidden_field :user_1_id, value: current_user.id %>
+          <%= f.hidden_field :user_2_id, value: user.id %>
+          <%= f.submit("talk") %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
