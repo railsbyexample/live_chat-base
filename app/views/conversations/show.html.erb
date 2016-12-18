@@ -1,6 +1,6 @@
 <h1><%= other_user(@conversation).name %></h1>
 
-<div id="messages" data-chat-room-id="<%= @conversation.id %>">
+<div id="messages" data-conversation-id="<%= @conversation.id %>">
   <%= render @conversation.messages %>
 </div>
 
