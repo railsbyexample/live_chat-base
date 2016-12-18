@@ -1,4 +1,15 @@
-<p id="notice"><%= notice %></p>
+<h1><%= other_user(@conversation).name %></h1>
 
-<%= link_to 'Edit', edit_conversation_path(@conversation) %> |
-<%= link_to 'Back', conversations_path %>
+<div id="messages" data-chat-room-id="<%= @conversation.id %>">
+  <%= render @conversation.messages %>
+</div>
+
+<%= form_for @message, url: '#' do |f| %>
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: 'form-control' %>
+    <small class="text-muted">From 2 to 1000 characters</small>
+  </div>
+
+  <%= f.submit "Post", class: 'btn btn-primary btn-lg' %>
+<% end %>

@@ -10,6 +10,7 @@ class ConversationsController < ApplicationController
   # GET /conversations/1
   # GET /conversations/1.json
   def show
+    @message = Message.new
   end
 
   # GET /conversations/new
