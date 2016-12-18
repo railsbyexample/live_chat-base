@@ -1,21 +1,7 @@
-<%= form_for Conversation.new do |f| %>
-  <div class="card">
-    <div class="card-block">
-      <div class="row">
-        <div class="col-md-1">
-          <%= gravatar_for user %>
-        </div>
-        <div class="col-md-8">
-          <p class="card-text">
-            <%= user.name %>
-          </p>
-        </div>
-        <div class="col-md-8">
-          <%= f.hidden_field :user_1_id, value: current_user.id %>
-          <%= f.hidden_field :user_2_id, value: user.id %>
-          <%= f.submit("talk") %>
-        </div>
-      </div>
-    </div>
-  </div>
+<%= form_for Conversation.new, html: {class: 'list-group-item list-group-item-action'} do |f| %>
+  <%= f.hidden_field :user_1_id, value: current_user.id %>
+  <%= f.hidden_field :user_2_id, value: user.id %>
+  <%= gravatar_for user %>
+  <%= user.name %>
+  <%= f.submit "talk", class: "btn btn-primary float-xs-right" %>
 <% end %>
