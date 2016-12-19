@@ -1,11 +1,7 @@
 <div class="card">
   <div class="card-block">
-    <div class="row">
-      <div class="col-xs-2">
-        <%= gravatar_for message.user %>
-      </div>
-      <span class="text-muted"><%= message.user.name %> says</span><br>
-      <%= message.body %>
-    </div>
+    <%= gravatar_for message.user %>
+    <small class="text-muted"><%= message.user.name %> says</small><br>
+    <div class="card-text mt-1"><%= message.body %></div>
   </div>
 </div>
