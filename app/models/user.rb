@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :user_2_conversations, class_name: 'Conversation', foreign_key: 'user_2_id', dependent: :destroy
 
   def conversations
-    user_1_conversations + user_2_conversations
+    Conversation.where('user_1_id = ? or user_2_id = ?', self.id, self.id)
   end
 
   def name
