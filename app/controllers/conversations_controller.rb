@@ -25,14 +25,8 @@ class ConversationsController < ApplicationController
   # POST /conversations
   # POST /conversations.json
   def create
-
-    target_user_id = params[:conversation][:user_2_id]
-    @conversation = current_user.conversations.find do |conv|
-      conv.user_1_id.to_s == target_user_id || conv.user_2_id.to_s == target_user_id
-    end
+    @conversation = current_user.conversation_with params[:conversation][:user_2_id]
     found = !!@conversation
-
-    puts @conversation
 
     @conversation ||= Conversation.new(conversation_params)
 

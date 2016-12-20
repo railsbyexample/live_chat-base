@@ -14,6 +14,12 @@ class User < ApplicationRecord
     Conversation.where('user_1_id = ? or user_2_id = ?', self.id, self.id)
   end
 
+  def conversation_with user_id
+    Conversation.find_by(
+      '(user_1_id = :id_1 and user_2_id = :id_2) or (user_2_id = :id_1 and user_1_id = :id_2)',
+      id_1: self.id, id_2: user_id)
+  end
+
   def name
     email.split('@')[0]
   end
