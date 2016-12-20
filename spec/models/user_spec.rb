@@ -25,8 +25,11 @@ RSpec.describe User, type: :model do
       expect((user_1.conversation_with user_2.id).id).to eq conversation.id
     end
 
-    it 'should return undefined if no conversations with given user' do
-      pending
+    it 'should return nil if no conversations with given user' do
+      user_1 = create :user
+      user_2 = create :user
+
+      expect(user_1.conversation_with user_2.id).to eq nil
     end
   end
 end
