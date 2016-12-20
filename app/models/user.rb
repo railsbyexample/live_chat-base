@@ -15,9 +15,9 @@ class User < ApplicationRecord
   end
 
   def conversation_with user_id
-    Conversation.find_by(
-      '(user_1_id = :id_1 and user_2_id = :id_2) or (user_2_id = :id_1 and user_1_id = :id_2)',
-      id_1: self.id, id_2: user_id)
+    self.conversations.find_by(
+      'user_1_id = :other_user_id or user_2_id = :other_user_id',
+      other_user_id: user_id)
   end
 
   def name
