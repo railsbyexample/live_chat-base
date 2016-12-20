@@ -1,24 +1,24 @@
-# README
+# MessRb
+A little instant messenger built as a refresher for RoR and to try out Rails 5 and ActionCable. With decent test coverage using `rspec` and a decent UI using `bootstrap-4`
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Usage
+Just clone the repo, run:
+```bash
+  rails db:create
+  rails db:migrate
+  rails server
+```
+And you're all set
 
-Things you may want to cover:
+## Features
+- [x] Start a conversation with any other registered user
+- [x] Continue a conversation
+- [x] Send and receive messages in "real-time"
+- [ ] Add contacts by email or search
+- [ ] Add message notifications
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Improvements
+- Increase test coverage
+- Use ActionCable more efficiently
+- Write a standalone client
+- Make a serous `heroku` deployment
