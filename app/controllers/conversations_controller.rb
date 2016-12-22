@@ -25,20 +25,28 @@ class ConversationsController < ApplicationController
   # POST /conversations
   # POST /conversations.json
   def create
+    # Try to find a matching conversation
     @conversation = current_user.conversation_with params[:conversation][:user_2_id]
-    found = !!@conversation
+    conversation_exists = !!@conversation
 
-    @conversation ||= Conversation.new(conversation_params)
+    # create new conversation if needed
+    @conversation ||= Conversation.create conversation_params
 
     respond_to do |format|
-      if found
-        format.html { redirect_to @conversation }
-        format.json { render :show, location: @conversation }
-      elsif @conversation.save
-        format.html { redirect_to @conversation }
-        format.json { render :show, status: :created, location: @conversation }
+      if @conversation.persisted?
+        format.html do
+          @message = Message.new
+          render :show,
+            status: conversation_exists ? :ok : :created,
+            location: @conversation
+        end
+        format.json do
+          render :show,
+            status: conversation_exists ? :ok : :created,
+            location: @conversation
+        end
       else
-        format.html { render :new }
+        format.html { redirect_to '/users' }
         format.json { render json: @conversation.errors, status: :unprocessable_entity }
       end
     end
