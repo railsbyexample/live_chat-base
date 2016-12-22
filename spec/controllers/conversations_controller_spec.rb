@@ -38,7 +38,7 @@ RSpec.describe ConversationsController, type: :controller do
 
       it 'should render the existing conversation for inverted users' do
         post :create, params: { conversation: { user_1_id: @user_2.id, user_2_id: @user_1.id } }
-        assert_response :created
+        assert_response :success
       end
     end
 
