@@ -26,17 +26,16 @@ class ConversationsController < ApplicationController
   # POST /conversations.json
   def create
     @conversation = current_user.conversation_with params[:conversation][:user_2_id]
-    found = !!@conversation
-
-    @conversation ||= Conversation.new(conversation_params)
+    @conversation ||= Conversation.create conversation_params
 
     respond_to do |format|
-      if found
+      if @conversation.persisted?
         format.html { redirect_to @conversation }
-        format.json { render :show, location: @conversation }
-      elsif @conversation.save
-        format.html { redirect_to @conversation }
-        format.json { render :show, status: :created, location: @conversation }
+        format.json do
+          render :show,
+            status: @conversation.new_record? ? :created : :ok,
+            location: @conversation
+        end
       else
         format.html { render :new }
         format.json { render json: @conversation.errors, status: :unprocessable_entity }
