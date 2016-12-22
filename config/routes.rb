@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :conversations
   resources :messages
-  resources :chat_rooms
   resources :users, only: [:index]
 
   root 'conversations#index'
