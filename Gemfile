@@ -40,6 +40,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker', '~> 1.6'
   gem 'guard-rspec'
+  gem 'jasmine'
 end
 
 group :development do
