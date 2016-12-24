@@ -10,9 +10,7 @@ class User < ApplicationRecord
   has_many :user_2_conversations, class_name: 'Conversation', foreign_key: 'user_2_id', dependent: :destroy
 
   def conversations
-    Conversation
-    .where('user_1_id = :id or user_2_id = :id', id: self.id)
-    .includes(:user_1, :user_2)
+    Conversation.where('user_1_id = :id or user_2_id = :id', id: self.id)
   end
 
   def conversation_with user_id
