@@ -3,7 +3,7 @@ require 'factory_girl'
 # Clean up db
 User.delete_all
 Conversation.delete_all
-
+Message.delete_all
 
 # Development fake data
 test_user_email = 'test.user@example.com'
@@ -26,10 +26,10 @@ test_conversation_num.times do
   # Get users for conversation
   user_1 = users.sample
   user_2 = users.sample
-  # Retry if same user
-  user_2 = users.sample while user_2.id == user_1.id
-  # Create conversation
-  Conversation.create user_1: user_1, user_2: user_2
+  # Create conversation if it doesn't exist
+  if !(user_2.id == user_1.id or user_1.conversation_with(user_2.id))
+    Conversation.create user_1: user_1, user_2: user_2
+  end
 end
 conversations = Conversation.all
 
