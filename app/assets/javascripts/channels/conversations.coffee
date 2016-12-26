@@ -3,6 +3,7 @@ jQuery(document).on 'turbolinks:load', ->
   if $('#messages').length > 0
     messages_to_bottom = -> messages.scrollTop(messages.prop("scrollHeight"))
     messages_to_bottom()
+    console.log('init chat')
     App.global_chat = App.cable.subscriptions.create {
         channel: "ConversationsChannel"
         conversation_id: messages.data('conversation-id')
@@ -14,10 +15,12 @@ jQuery(document).on 'turbolinks:load', ->
         # Called when terminated
 
       received: (data) ->
+        console.log('receiving message')
         messages.append data['message']
         messages_to_bottom()
 
       send_message: (message, conversation_id) ->
+        console.log('sending message')
         @perform 'send_message', message: message, conversation_id: conversation_id
 
     $('#new_message').submit (e) ->
