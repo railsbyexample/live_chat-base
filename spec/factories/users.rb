@@ -16,7 +16,6 @@ FactoryGirl.define do
     end
   end
 
-
   factory :conversation do
     user_1 { FactoryGirl.create :user }
     user_2 { FactoryGirl.create :user }
