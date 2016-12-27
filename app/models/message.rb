@@ -4,7 +4,10 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :conversation
 
-  default_scope { order(:created_at) }
+  default_scope do
+    order(:created_at)
+    includes(:user)
+  end
 
   def timestamp
     created_at.strftime('%H:%M:%S %d %B %Y')

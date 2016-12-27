@@ -10,14 +10,15 @@ class User < ApplicationRecord
   has_many :user_2_conversations, class_name: 'Conversation', foreign_key: 'user_2_id', dependent: :destroy
 
   def conversations
-    Conversation.where('user_1_id = :id or user_2_id = :id', id: self.id)
+    Conversation.where 'user_1_id = :id or user_2_id = :id', id: self.id
   end
 
   def conversation_with user_id
-    self.conversations.find_by(
-      'user_1_id = :other_user_id or user_2_id = :other_user_id',
-      other_user_id: user_id
-    )
+    self.conversations.find_by 'user_1_id = :id or user_2_id = :id', id: user_id
+  end
+
+  def gravatar_url
+    "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email)}?s=40"
   end
 
   def name

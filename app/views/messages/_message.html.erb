@@ -1,9 +1,8 @@
 <div class="card">
   <div class="card-block">
-    <%= gravatar_for message.user %>
-    <small class="text-muted"><%= message.user.name %>
-      says
-    </small><br>
-    <div class="card-text mt-1"><%= message.body %></div>
+    <%= image_tag message.user ? message.user.gravatar_url : '', id: 'message-user-gravatar' %>
+    <small class="text-muted", id="message-user-name"><%= message.user && message.user.name %></small>
+    <small> says: </small><br>
+    <div class="card-text mt-1", id="message-body"><%= message.body %></div>
   </div>
 </div>
