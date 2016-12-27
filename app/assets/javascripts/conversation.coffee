@@ -20,6 +20,10 @@
       $textarea.val('')
     e.preventDefault()
     return false
+
+  this.App.Conversation.display_message = (message) ->
+    $conversation = $('#conversation-' + message.conversation_id)
+    $conversation.find('#conversation-preview').text(message.user.name + ': ' + message.body)
 ).call(this)
 
 jQuery(document).on 'turbolinks:load', ->
@@ -27,7 +31,10 @@ jQuery(document).on 'turbolinks:load', ->
   App.scroll_to_bottom()
 
   $(document).on 'message-received', ->
-    App.Conversation.append_message App.last_message
-    App.scroll_to_bottom()
+    if $('#messages').length > 0
+      App.Conversation.append_message App.last_message
+      App.scroll_to_bottom()
+    if $('#conversations').length > 0
+      App.Conversation.display_message App.last_message
 
   $('#new_message').submit App.Conversation.submit_message
