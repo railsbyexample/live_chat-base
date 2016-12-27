@@ -23,7 +23,7 @@ describe 'conversation', ->
       $('#fixture').remove()
 
     it 'should apend a new message to the thread', ->
-      message = body: 'message-body'
+      message = body: 'message-body', user: { name: 'test', gravatar_url: 'url' }
 
       ## Apply the method
       App.Conversation.append_message message
