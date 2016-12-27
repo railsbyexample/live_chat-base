@@ -22,10 +22,10 @@ describe 'user', ->
 
   it 'should perform send_message on the channel', ->
     ## Spy on perform method
-    performedAction = spyOn App.global_messages, 'perform'
+    performed_action = spyOn App.global_messages, 'perform'
 
     ## Trigger the method
     App.global_messages.send_message sent_message.body, sent_message.conversation_id
 
     ## Check the action is performed through the channel
-    expect(performedAction).toHaveBeenCalledWith('send_message', sent_message)
+    expect(performed_action).toHaveBeenCalledWith('send_message', sent_message)
