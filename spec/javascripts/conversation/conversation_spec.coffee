@@ -1,5 +1,11 @@
 describe 'conversation', ->
 
+  beforeEach ->
+    $('<div id="fixture"><div id="messages"></div></div>').appendTo('body')
+
+  afterEach ->
+    $('#fixture').remove()
+
   it 'should append message to thread when received', ->
     ## Spy on append method
     append_spy = spyOn(App.Conversation, 'append_message').and.callFake(-> true)
