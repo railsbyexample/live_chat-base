@@ -4,9 +4,7 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :conversation
 
-  def get_user conversation
-    self.user_id == conversation.user_1_id ? conversation.user_1 : conversation.user_2
-  end
+  default_scope { order(:created_at) }
 
   def timestamp
     created_at.strftime('%H:%M:%S %d %B %Y')

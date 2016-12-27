@@ -16,9 +16,14 @@ FactoryGirl.define do
     end
   end
 
-
   factory :conversation do
     user_1 { FactoryGirl.create :user }
     user_2 { FactoryGirl.create :user }
+  end
+
+  factory :message do
+    conversation { FactoryGirl.create :conversation }
+    user { FactoryGirl.create :user }
+    body { Faker::Lorem.words 5 }
   end
 end
