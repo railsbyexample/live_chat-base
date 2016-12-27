@@ -8,7 +8,7 @@ jQuery(document).on 'turbolinks:load', ->
   },
   {
     received: (data) ->
-      App.last_message = data
+      App.last_message = JSON.parse(data.message)
       $(document).trigger 'message-received'
     send_message: (body, conversation_id) ->
       @perform 'send_message', body: body, conversation_id: conversation_id

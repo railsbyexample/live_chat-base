@@ -7,6 +7,6 @@ class MessageBroadcastJob < ApplicationJob
   end
 
   def render_message(message)
-    MessagesController.render partial: 'messages/message', locals: { message: message }
+    MessagesController.render json: message
   end
 end

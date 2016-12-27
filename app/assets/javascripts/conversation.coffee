@@ -20,3 +20,13 @@ jQuery(document).on 'turbolinks:load', ->
 
   $(document).on 'message-received', ->
     App.Conversation.append_message App.last_message
+
+  $('#new_message').submit (e) ->
+    $messages = $('#messages')
+    $this = $(this)
+    textarea = $this.find('#message_body')
+    if $.trim(textarea.val()).length > 1
+      App.global_messages.send_message textarea.val(), $messages.data('conversation-id')
+      textarea.val('')
+    e.preventDefault()
+    return false
