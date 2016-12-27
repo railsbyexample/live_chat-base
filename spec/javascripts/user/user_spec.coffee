@@ -1,7 +1,8 @@
 describe 'user', ->
 
   ## Fake message
-  received_message = user_id: '1', conversation_id: '1', body: 'message'
+  user = id: '1', name: 'test', gravatar_url: 'url'
+  received_message = message: JSON.stringify(conversation_id: '1', body: 'message', user: user)
   sent_message = conversation_id: '1', body: 'message'
 
   it 'should create a channel subscription', ->
@@ -18,7 +19,7 @@ describe 'user', ->
 
     ## Check the data is set and the event is called
     expect(message_received).toHaveBeenCalled()
-    expect(App.last_message).toEqual(received_message)
+    expect(App.last_message).toEqual(JSON.parse(received_message.message))
 
   it 'should perform send_message on the channel', ->
     ## Spy on perform method
