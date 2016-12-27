@@ -15,23 +15,17 @@ jQuery(document).on 'turbolinks:load', ->
     App.global_messages = App.cable.subscriptions.create {
         channel: "UsersChannel"
       },
-      connected: ->
-        console.log('user notifications initialized')
+      {
+        received: (data) ->
+          if messages.length > 0
+            messages.append data['message']
+          if conversations.length > 0
+            console.log('notify user: ', data['message'])
+          messages_to_bottom()
 
-      disconnected: ->
-        console.log('user notifications disconnected')
-
-      received: (data) ->
-        if messages.length > 0
-          messages.append data['message']
-
-        if conversations.length > 0
-          console.log('notify user: ', data['message'])
-
-        messages_to_bottom()
-
-      send_message: (body, conversation_id) ->
-        @perform 'send_message', body: body, conversation_id: conversation_id
+        send_message: (body, conversation_id) ->
+          @perform 'send_message', body: body, conversation_id: conversation_id
+      }
 
     $('#new_message').submit (e) ->
       $this = $(this)
