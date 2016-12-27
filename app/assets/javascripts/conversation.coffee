@@ -2,6 +2,8 @@
   this.App || (this.App = {})
   this.App.Conversation || (this.App.Conversation = {})
 
+  this.App.scroll_to_bottom = -> window.scrollTo(0, document.body.scrollHeight)
+
   this.App.Conversation.append_message = (message) ->
     $messages_thread = $('#messages')
     $template = $('#message-template').clone()
@@ -22,7 +24,10 @@
 
 jQuery(document).on 'turbolinks:load', ->
 
+  App.scroll_to_bottom()
+
   $(document).on 'message-received', ->
     App.Conversation.append_message App.last_message
+    App.scroll_to_bottom()
 
   $('#new_message').submit App.Conversation.submit_message
