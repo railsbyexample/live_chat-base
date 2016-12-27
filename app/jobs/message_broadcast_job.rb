@@ -7,6 +7,6 @@ class MessageBroadcastJob < ApplicationJob
   end
 
   def render_message(message)
-    MessagesController.render json: message
+    MessagesController.render json: message.to_json(include: { user: { methods: [:name, :gravatar_url] } })
   end
 end
