@@ -13,7 +13,7 @@ RSpec.describe MessageBroadcastJob, type: :job do
   end
 
   it 'should brodcast the message through ActionCable' do
-    expect(ActionCable.server).to receive(:broadcast)
+    expect(ActionCable.server).to receive(:broadcast).twice
     perform_enqueued_jobs { create :message }
   end
 end
