@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def conversation_with user_id
-    @conversations.find_by 'user_1_id = :id or user_2_id = :id', other_user_id: user_id
+    self.conversations.find_by 'user_1_id = :id or user_2_id = :id', id: user_id
   end
 
   def gravatar_url
