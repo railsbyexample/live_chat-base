@@ -1,8 +1,13 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+# Action Cable provides the framework to deal with WebSockets in Rails.
+# You can generate new channels where WebSocket features live using the rails generate channel command.
+#
+# = require action_cable
+# = require_self
 
-jQuery(document).on 'turbolinks:load', ->
+(->
+  this.App || (this.App = {});
+
+  App.cable = ActionCable.createConsumer();
   App.global_messages = App.cable.subscriptions.create {
     channel: "UsersChannel"
   },
@@ -13,3 +18,4 @@ jQuery(document).on 'turbolinks:load', ->
     send_message: (body, conversation_id) ->
       @perform 'send_message', body: body, conversation_id: conversation_id
   }
+).call(this);
