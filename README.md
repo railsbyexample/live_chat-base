@@ -18,9 +18,3 @@ And you're all set
 - [x] Send and receive messages in "real-time"
 - [ ] Add contacts by email or search
 - [ ] Add message notifications
-
-## Improvements
-- Increase test coverage
-- Use ActionCable more efficiently
-- Write a standalone client
-- Make a serous `heroku` deployment
