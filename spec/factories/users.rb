@@ -1,29 +1,29 @@
 require 'faker'
 
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :user do
 
     email { Faker::Internet.email }
-    password '123456'
-    password_confirmation '123456'
+    password { '123456' }
+    password_confirmation { '123456' }
 
     trait :with_conversations do
       after :create do |user|
-        FactoryGirl.create_list :conversation, 3, user_1: user
-        FactoryGirl.create_list :conversation, 4, user_2: user
+        FactoryBot.create_list :conversation, 3, user_1: user
+        FactoryBot.create_list :conversation, 4, user_2: user
       end
     end
   end
 
   factory :conversation do
-    user_1 { FactoryGirl.create :user }
-    user_2 { FactoryGirl.create :user }
+    user_1 { FactoryBot.create :user }
+    user_2 { FactoryBot.create :user }
   end
 
   factory :message do
-    conversation { FactoryGirl.create :conversation }
-    user { FactoryGirl.create :user }
+    conversation { FactoryBot.create :conversation }
+    user { FactoryBot.create :user }
     body { Faker::Lorem.words 5 }
   end
 end

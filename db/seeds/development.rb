@@ -20,7 +20,7 @@ User.create email: test_user_2_email, password: test_user_2_password, password_c
 
 # Sample users
 test_user_num.times do
-  FactoryGirl.create :user
+  FactoryBot.create :user
 end
 users = User.all
 
