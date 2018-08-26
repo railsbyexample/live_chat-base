@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :conversations
   resources :messages
-  resources :users, only: [:index]
+  resources :users, only: :index
+
+  resources :accounts, only: %i[new create]
 
   root 'conversations#index'
 
