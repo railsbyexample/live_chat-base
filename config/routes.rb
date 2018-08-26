@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  get 'accounts/new'
+  get 'accounts/create'
   resources :conversations
   resources :messages
-  resources :users, only: [:index]
+  resources :users, only: :index
+
+  resources :accounts, only: %i[new create]
 
   root 'conversations#index'
 

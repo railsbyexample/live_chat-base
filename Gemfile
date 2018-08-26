@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
 
+gem 'apartment'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'devise'
 
@@ -33,6 +34,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', '~> 1.6'
   gem 'rspec-rails', '~> 3.5'
+  gem 'rails-controller-testing'
 end
 
 group :development do
