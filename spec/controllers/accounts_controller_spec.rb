@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AccountsController, :focus, type: :controller do
+RSpec.describe AccountsController, type: :controller do
   describe 'GET #new' do
     it 'returns http success' do
       get :new

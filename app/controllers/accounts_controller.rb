@@ -1,5 +1,8 @@
 class AccountsController < ApplicationController
-  def new; end
+  def new
+    @user = User.new
+    @account = Account.new
+  end
 
   def create
     account_result = create_account
@@ -11,7 +14,7 @@ class AccountsController < ApplicationController
     (render(:new) && return) unless user_result.success?
 
     redirect_to new_account_path,
-                notice: 'Your account has been created, please confirm your email to continue'
+                notice: 'Your account has been successfully created, please confirm your email to continue'
   end
 
   private
