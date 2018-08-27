@@ -25,6 +25,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
 
+gem 'react-rails'
+gem 'webpacker', '~> 3.5'
+
 gem 'haml-rails'
 
 gem 'apartment'
