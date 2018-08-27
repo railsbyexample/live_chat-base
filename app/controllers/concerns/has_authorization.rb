@@ -1,4 +1,4 @@
-module HandleAuthorizationExceptions
+module HasAuthorization
   extend ActiveSupport::Concern
 
   def authorize_owner!

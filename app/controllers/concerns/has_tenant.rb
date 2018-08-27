@@ -1,4 +1,4 @@
-module HandleTenant
+module HasTenant
   extend ActiveSupport::Concern
 
   included do
@@ -12,7 +12,21 @@ module HandleTenant
       (tenant == 'public' ? nil : Organization.find_by(subdomain: tenant))
   end
 
-  def tenant_site?
+  def on_public_tenant?
+    Apartment::Tenant.current == 'public'
+  end
+
+  def on_private_tenant?
     current_organization.present?
+  end
+
+  def block_private_tenant!
+    return if Apartment::Tenant.current == 'public'
+    redirect_to root_path
+  end
+
+  def block_public_tenant!
+    return unless Apartment::Tenant.current == 'public'
+    redirect_to root_path
   end
 end
