@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :accounts, only: %i[new create]
 
-  root 'conversations#index'
+  root 'accounts#new'
 
   devise_for :users, controllers: { invitations: 'auth/invitations' }
 

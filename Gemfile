@@ -25,6 +25,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
 
+gem 'react-rails'
+gem 'webpacker', '~> 3.5'
+
 gem 'haml-rails'
 
 gem 'apartment'
@@ -47,8 +50,8 @@ group :development, :test do
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'rb-readline'
+  gem 'letter_opener'
+
   gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

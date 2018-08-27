@@ -1,8 +1,11 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    identified_by :current_user
+    identified_by :current_user, :tenant
 
     def connect
+      self.tenant = request.host.split('.').first
+      Apartment::Tenant.switch! tenant
+
       self.current_user = find_verified_user
       logger.add_tags 'ActionCable', current_user.email
     end
