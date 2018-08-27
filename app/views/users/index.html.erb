@@ -1,5 +1,6 @@
 <div class="container">
   <h6> Users available to chat </h6>
+  <%= link_to 'Invite user', new_user_invitation_path, class: 'btn btn-primary' %>
   <div class="list-group">
     <%= render @users %>
   </div>

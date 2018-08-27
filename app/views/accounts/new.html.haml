@@ -1,27 +1,28 @@
-= form_tag controller: 'accounts', action: 'create' do
-  .mb-4
-    = fields_for(@account) do |f|
-      .form-group Account
+.container
+  = form_tag controller: 'accounts', action: 'create' do
+    .mb-4
+      = fields_for(@account) do |f|
+        .form-group Account
 
-      = render 'errors', resource: @account
+        = render 'errors', resource: @account
 
-      .form-group
-        = f.text_field :subdomain, autofocus: true, autocomplete: "subdomain", placeholder: 'Subdomain', class: 'form-control'
+        .form-group
+          = f.text_field :subdomain, autofocus: true, autocomplete: "subdomain", placeholder: 'Subdomain', class: 'form-control'
 
-  .mb-4
-    = fields_for(@user) do |f|
-      .form-group User
+    .mb-4
+      = fields_for(@user) do |f|
+        .form-group User
 
-      = render 'errors', resource: @user
+        = render 'errors', resource: @user
 
-      .form-group
-        = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Email', class: 'form-control'
+        .form-group
+          = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Email', class: 'form-control'
 
-      .form-group
-        = f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'form-control'
+        .form-group
+          = f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'form-control'
 
-      .form-group
-        = f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Password confirmation', class: 'form-control'
+        .form-group
+          = f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Password confirmation', class: 'form-control'
 
-  .form-group
-    = submit_tag "Create account!", class: 'btn btn-primary btn-block'
+    .form-group
+      = submit_tag "Create account!", class: 'btn btn-primary btn-block'
