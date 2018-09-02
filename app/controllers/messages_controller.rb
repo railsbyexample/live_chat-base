@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :block_public_tenant!
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   # GET /messages

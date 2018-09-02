@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  before_action :block_private_tenant!
   def new
     @user = User.new
     @account = Account.new

@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
-  include HandlePublicTenant
-  include HandleTenant
-  include HandleAuthorizationExceptions
+  include HasAuthorization
+  include HasTenant
 
   protect_from_forgery with: :exception
 end
