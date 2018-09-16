@@ -32,7 +32,7 @@ gem 'haml-rails'
 
 gem 'apartment'
 gem 'apartment-activejob'
-gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'bootstrap', '~> 4.1'
 gem 'devise'
 gem 'devise_invitable'
 
