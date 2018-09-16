@@ -83,21 +83,24 @@ class Show extends React.Component {
           </div>
         ))}
 
-        <Form layout="horizontal" onSubmit={this.handleSubmit}>
-          <FormItem>
-            <InputGroup compact>
-              <TextArea
-                style={{ width: '80%', height: '94px' }}
-                placeholder="Enter message"
-                onChange={this.handleChange}
-                onKeyPress={this.handleEnter}
-                value={this.state.message}
-              />
+        <div className="pt-3" style={{ backgroundColor: 'white', position: 'fixed', bottom: 0, left: 0, right: 0 }}>
+          <Form layout="horizontal" onSubmit={this.handleSubmit}>
+            <FormItem>
+              <InputGroup compact>
+                <TextArea
+                  style={{ width: '80%', height: '94px' }}
+                  placeholder="Enter message"
+                  onChange={this.handleChange}
+                  onKeyPress={this.handleEnter}
+                  value={this.state.message}
+                />
 
-              <Button style={{ width: '20%', height: '94px' }} htmlType="submit">Send</Button>
-            </InputGroup>
-          </FormItem>
-        </Form>
+                <Button style={{ width: '20%', height: '94px' }} htmlType="submit">Send</Button>
+              </InputGroup>
+            </FormItem>
+          </Form>
+        </div>
+        <div style={{width: '100%', height: '134px' }} />
       </div>
     );
   }
