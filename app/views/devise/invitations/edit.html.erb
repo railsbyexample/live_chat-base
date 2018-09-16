@@ -5,12 +5,9 @@
   <%= f.hidden_field :invitation_token, readonly: true %>
 
   <% if f.object.class.require_password_on_accepting %>
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
+  <%= form_group :password, :password_field, f %>
+  <%= form_group :password_confirmation, :password_field, f %></p>
   <% end %>
 
-  <p><%= f.submit t("devise.invitations.edit.submit_button") %></p>
+  <%= form_button t("devise.invitations.edit.submit_button"), f %>
 <% end %>
