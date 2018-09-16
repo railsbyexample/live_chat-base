@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Avatar, Card, Button, Form, Input } from 'antd';
 
 const InputGroup = Input.Group
+const TextArea = Input.TextArea
 const FormItem = Form.Item
 const Meta = Card.Meta
 
@@ -47,11 +48,13 @@ class Show extends React.Component {
   }
 
   render () {
+    let userMessageMargin = (message) => (message.user_id == this.props.current_user_id ? 'ml-4' : 'mr-4')
+    let userMessageBackground = (message) => (message.user_id == this.props.current_user_id ? { backgroundColor: '#eee' } : {})
     return (
       <div className="container">
         {this.state.messages.map(message => (
-          <div key={message.id} className='ant-card-compact mb-1'>
-            <Card>
+          <div key={message.id} className={`ant-card-compact mb-1 ${userMessageMargin(message)}`}>
+            <Card style={userMessageBackground(message)}>
               <Meta
                 avatar={<Avatar src={message.user.gravatar_url} />}
                 description={message.user.name}
@@ -64,14 +67,15 @@ class Show extends React.Component {
         <Form layout="horizontal" onSubmit={this.handleSubmit}>
           <FormItem>
             <InputGroup compact>
-              <Input
+              <TextArea
+                rows={4}
                 style={{ width: '80%' }}
                 placeholder="Enter message"
                 onChange={this.handleChange}
                 value={this.state.message}
               />
 
-              <Button style={{ width: '20%' }} htmlType="submit">Send</Button>
+              <Button style={{ width: '20%', height: '94px' }} htmlType="submit">Send</Button>
             </InputGroup>
           </FormItem>
         </Form>
