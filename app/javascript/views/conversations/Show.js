@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Avatar, Card, Button, Form, Input } from 'antd';
 
+import Cable from '../../services/Cable'
+
 const InputGroup = Input.Group
 const TextArea = Input.TextArea
 const FormItem = Form.Item
@@ -13,6 +15,7 @@ class Show extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEnter = this.handleEnter.bind(this)
     this.sendMessage = this.sendMessage.bind(this)
 
     this.state = {
@@ -22,7 +25,10 @@ class Show extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('message-received', this.handleMessageReceived.bind(this), this)
+    this.messagesSubscription = Cable.subscriptions.create(
+      { channel: 'UsersChannel' },
+      { received: data => { this.handleMessageReceived(JSON.parse(data.message)) } }
+    )
   }
 
   componentWillUnmount() {
@@ -39,17 +45,30 @@ class Show extends React.Component {
     this.setState({ message: '' })
   }
 
-  handleMessageReceived() {
-    console.log(App.last_message)
+  handleMessageReceived(message) {
+    if (message.conversation_id == this.props.conversation_id) {
+      const messages = this.state.messages.concat(message)
+      this.setState({ messages })
+    }
+  }
+
+  handleEnter(event) {
+    if (event.which == 13) {
+      event.preventDefault()
+      this.handleSubmit({ target: event.target.form, preventDefault: () => {} })
+    }
   }
 
   sendMessage(message) {
-    App.global_messages.send_message(this.state.message, 1)
+    this.messagesSubscription.perform('send_message',
+      { body: this.state.message, conversation_id: this.props.conversation_id }
+    )
   }
 
   render () {
-    let userMessageMargin = (message) => (message.user_id == this.props.current_user_id ? 'ml-4' : 'mr-4')
+    let userMessageMargin = (message) => (message.user_id == this.props.current_user_id ? 'ml-5' : 'mr-5')
     let userMessageBackground = (message) => (message.user_id == this.props.current_user_id ? { backgroundColor: '#eee' } : {})
+
     return (
       <div className="container">
         {this.state.messages.map(message => (
@@ -68,10 +87,10 @@ class Show extends React.Component {
           <FormItem>
             <InputGroup compact>
               <TextArea
-                rows={4}
-                style={{ width: '80%' }}
+                style={{ width: '80%', height: '94px' }}
                 placeholder="Enter message"
                 onChange={this.handleChange}
+                onKeyPress={this.handleEnter}
                 value={this.state.message}
               />
 

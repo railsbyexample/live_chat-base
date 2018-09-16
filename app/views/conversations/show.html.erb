@@ -1,4 +1,5 @@
 <%= react_component 'conversations/Show',
+                    conversation_id: @conversation.id,
                     messages: @conversation.messages.to_json(include: { user: { methods: %i[name gravatar_url] } }),
                     current_user_id: current_user.id
 %>
