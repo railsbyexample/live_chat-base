@@ -32,7 +32,7 @@ class Index extends React.Component {
       <div className="container">
         <div className="mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <h5 className="mb-0">Users</h5>
-          <Button href="users/invitation/new">Invite</Button>
+          <Button href="/users/invitation/new">Invite</Button>
         </div>
         {this.state.users.map(user => (
           <div key={user.id} className={`ant-card-compact mb-1`}>
