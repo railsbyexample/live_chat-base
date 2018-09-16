@@ -1,7 +1,4 @@
-<div class="container">
-  <h6> Users available to chat </h6>
-  <%= link_to 'Invite user', new_user_invitation_path, class: 'btn btn-primary' %>
-  <div class="list-group">
-    <%= render @users %>
-  </div>
-</div>
+<%= react_component 'users/Index',
+                    users: @users.to_json(methods: %i[name gravatar_url]),
+                    current_user_id: current_user.id
+%>
