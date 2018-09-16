@@ -38,7 +38,7 @@ class Index extends React.Component {
     return (
       <div className="container">
         <div className="mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h5 className="mb-0">Conversations</h5>
+          <h5 className="mb-0">Chats</h5>
           <Button href="/users">New</Button>
         </div>
         {this.state.conversations.map(conversation => (

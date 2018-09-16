@@ -16,7 +16,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-light bg-faded">
+    <!-- <nav class="navbar navbar-light bg-faded">
 
       <a class="navbar-brand" href="/">MessRb</a>
 
@@ -36,7 +36,9 @@
       </ul>
       <% end %>
 
-    </nav>
+    </nav> -->
+
+    <%= react_component 'components/Navbar', current_user: current_user.to_json(methods: %i[name gravatar_url]) %>
 
     <% if notice && !notice.empty? %>
     <div class="container mt-2">
