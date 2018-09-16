@@ -16,7 +16,12 @@
   </head>
 
   <body>
-    <%= react_component 'components/Navbar', title: application_title, current_user: current_user.to_json(methods: %i[name gravatar_url]) %>
+    <%= react_component 'components/Navbar',
+          title: application_title,
+          current_user: current_user.to_json(methods: %i[name gravatar_url]),
+          github_logo: image_url('github_octocat.png'),
+          perezperret_logo: image_url('perezperret_logo.png')
+    %>
 
     <% if notice && !notice.empty? %>
     <div class="container mt-2">
