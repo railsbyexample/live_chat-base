@@ -4,7 +4,7 @@
   <%= devise_error_messages! %>
 
 <% resource.class.invite_key_fields.each do |field| -%>
-  <%= form_group field, text_field, f %></p>
+  <%= form_group field, :text_field, f %></p>
 <% end -%>
 
   <%= form_button t("devise.invitations.new.submit_button"), f %>
