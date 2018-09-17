@@ -1,6 +1,7 @@
 # Including this file sets the default url options. This is useful for mailers or background jobs
 module DefaultUrlOptions
   def default_url_options
+    puts '[DEVISE MAILER LOG] HOST: ', host, 'SUBDOMAIN: ', subdomain
     {
       host: host,
       subdomain: subdomain
