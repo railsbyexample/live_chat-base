@@ -7,12 +7,12 @@ class AccountsController < ApplicationController
 
   def create
     account_result = create_account
-    (render(:new) && return) unless account_result.success?
+    (render(:new, location: new_account_path) && return) unless account_result.success?
 
     create_tenant
 
     user_result = create_user_in_new_tenant
-    (render(:new) && return) unless user_result.success?
+    (render(:new, location: new_account_path) && return) unless user_result.success?
 
     redirect_to new_account_path,
                 notice: 'Your account has been successfully created, please confirm your email to continue'

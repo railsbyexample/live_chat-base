@@ -14,6 +14,7 @@ module DefaultUrlOptions
   end
 
   def host
+    ENV['app_host_with_port']
     'localhost:3000'
   end
 end
