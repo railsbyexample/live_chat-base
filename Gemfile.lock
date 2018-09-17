@@ -168,6 +168,8 @@ GEM
     public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.5)
+    rack-protection (2.0.4)
+      rack
     rack-proxy (0.6.4)
       rack
     rack-test (1.1.0)
@@ -252,6 +254,10 @@ GEM
       mimemagic
       smtpapi (~> 0.1)
     sexp_processor (4.11.0)
+    sidekiq (5.2.1)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
     smtpapi (0.1.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -323,6 +329,7 @@ DEPENDENCIES
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   sendgrid-actionmailer
+  sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
