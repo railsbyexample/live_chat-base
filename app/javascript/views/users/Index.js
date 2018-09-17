@@ -23,10 +23,6 @@ class Index extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit() {
-    this.formRef.current.submit()
-  }
-
   render () {
     return (
       <div className="container">
