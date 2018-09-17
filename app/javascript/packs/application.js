@@ -7,9 +7,11 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 import 'antd/dist/antd.css'
+import '../styles/utilities/margin.scss'
+import '../styles/components/antCard.scss'
 
 console.log('Hello World from Webpacker')
 // Support component names relative to this directory:
-var componentRequireContext = require.context("components", true)
+var componentRequireContext = require.context("views", true)
 var ReactRailsUJS = require("react_ujs")
 ReactRailsUJS.useContext(componentRequireContext)

@@ -3,41 +3,25 @@
   <head>
     <title>MessRb</title>
     <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_pack_tag 'application' %>
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"> -->
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="ws-host" content="<%= "ws://#{app_host_with_port}/cable" %>"
   </head>
 
   <body>
-
-    <nav class="navbar navbar-light bg-faded">
-
-      <a class="navbar-brand" href="/">MessRb</a>
-
-      <% if user_signed_in? %>
-      <ul class="nav navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/conversations">Chats</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users">Friends</a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav float-xs-right">
-        <li class="nav-item">
-          <a class="nav-link" href="/users/edit"><%= current_user.name %></a>
-        </li>
-      </ul>
-      <% end %>
-
-    </nav>
+    <%= react_component 'components/Navbar',
+          title: application_title,
+          current_user: current_user.to_json(methods: %i[name gravatar_url]),
+          github_logo: image_url('github_octocat.png'),
+          perezperret_logo: image_url('perezperret_logo.png')
+    %>
 
     <% if notice && !notice.empty? %>
     <div class="container mt-2">

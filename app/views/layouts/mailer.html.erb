@@ -8,6 +8,7 @@
   </head>
 
   <body>
+    <h1><%= Apartment::Tenant.current != 'public' ? "#{Apartment::Tenant.current} " : '' -%> MessRb</h1>
     <%= yield %>
   </body>
 </html>

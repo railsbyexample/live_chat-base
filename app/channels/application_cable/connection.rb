@@ -4,10 +4,11 @@ module ApplicationCable
 
     def connect
       self.tenant = request.host.split('.').first
-      Apartment::Tenant.switch! tenant
 
-      self.current_user = find_verified_user
-      logger.add_tags 'ActionCable', current_user.email
+      Apartment::Tenant.switch tenant do
+        self.current_user = find_verified_user
+        logger.add_tags 'ActionCable', current_user.email
+      end
     end
 
     protected

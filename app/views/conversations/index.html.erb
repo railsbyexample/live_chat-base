@@ -1,6 +1,4 @@
-<div class="container" id="conversations-index">
-  <h6> Your conversations </h6>
-  <div id="conversations" class="list-group">
-    <%= render @conversations %>
-  </div>
-</div>
+<%= react_component 'conversations/Index',
+                    conversations: @conversations.to_json(include: { user_1: { methods: %i[name gravatar_url] }, user_2: { methods: %i[name gravatar_url] } }, methods: %i[last_message]),
+                    current_user_id: current_user.id
+%>

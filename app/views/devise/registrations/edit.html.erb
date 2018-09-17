@@ -1,36 +1,17 @@
-<div class="container">
+<div class="container py-3 mb-5">
 
-  <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-block btn-warning mb-1" %>
+  <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-block btn-warning mb-3" %>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'mb-3', method: :put }) do |f| %>
 
     <%= devise_error_messages! %>
 
+    <%= form_group :email, :email_field, f, autofocus: true %>
+    <%= form_group :password, :password_field, f, autocomplete: "off" %>
+    <%= form_group :password_confirmation, :password_field, f, autocomplete: "off" %>
+    <%= form_group :current_password, :password_field, f, autocomplete: "off" %>
 
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-      <% if @minimum_password_length %>
-        <small><%= @minimum_password_length %> characters minimum</small>
-      <% end %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :current_password %>
-      <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
-    </div>
-
-    <%= f.submit "Update", class: "btn btn-primary btn-block" %>
+    <%= form_button "Update", f %>
   <% end %>
 
   <%= button_to "Cancel my account", registration_path(resource_name), data: true, method: :delete, class: "btn btn-primary btn-block btn-danger mt-1" %>

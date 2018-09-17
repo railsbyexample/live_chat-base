@@ -1,4 +1,9 @@
 .container
+  .alert.alert-warning
+    This is a demo project and the data will be wiped out periodically, if for some reason you find it useful and want to keep your data,
+    please open
+    %a{ href: 'http://https://github.com/perezperret/mess-rb/issues', class: 'alert-link' }
+      a Github issue
   = form_tag controller: 'accounts', action: 'create' do
     .mb-4
       = fields_for(@account) do |f|

@@ -31,7 +31,8 @@ gem 'webpacker', '~> 3.5'
 gem 'haml-rails'
 
 gem 'apartment'
-gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'apartment-activejob'
+gem 'bootstrap', '~> 4.1'
 gem 'devise'
 gem 'devise_invitable'
 

@@ -1,6 +1,6 @@
 module Auth
   class InvitationsController < Devise::InvitationsController
-    before_action :block_public
+    before_action :block_public_tenant!
     before_action :authorize_owner!, only: %i[new create]
 
     def create
