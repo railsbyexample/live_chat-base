@@ -1,6 +1,7 @@
 # Including this file sets the default url options. This is useful for mailers or background jobs
 module DefaultUrlOptions
   def default_url_options
+    puts '[DEVISE MAILER LOG] HOST: ', host, 'SUBDOMAIN: ', subdomain
     {
       host: host,
       subdomain: subdomain
@@ -14,6 +15,6 @@ module DefaultUrlOptions
   end
 
   def host
-    'localhost:3000'
+    ENV['app_host_with_port']
   end
 end

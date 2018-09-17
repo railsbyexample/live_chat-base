@@ -23,7 +23,11 @@ class Index extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit() {
+  handleSubmit(userId) {
+    const form = this.formRef.current
+    const userInput = form.querySelector("input[name='conversation[user_2_id]']")
+
+    userInput.value = userId
     this.formRef.current.submit()
   }
 
@@ -36,20 +40,20 @@ class Index extends React.Component {
         </div>
         {this.state.users.map(user => (
           <div key={user.id} className={`ant-card-compact mb-1`}>
-            <form method="post" action="/conversations" ref={this.formRef}>
-              <input type="hidden" name="authenticity_token" value={Auth.getAuthenticityToken()} />
-              <input type="hidden" name="conversation[user_1_id]" value={this.props.current_user_id} />
-              <input type="hidden" name="conversation[user_2_id]" value={user.id} />
-              <Card style={{ cursor: 'pointer' }} onClick={this.handleSubmit}>
-                <Meta
-                  avatar={<Avatar src={user.gravatar_url} />}
-                  description={user.email}
-                />
-                {user.name}
-              </Card>
-            </form>
+            <Card style={{ cursor: 'pointer' }} onClick={() => { this.handleSubmit(user.id) }}>
+              <Meta
+                avatar={<Avatar src={user.gravatar_url} />}
+                description={user.email}
+              />
+              {user.name}
+            </Card>
           </div>
         ))}
+        <form method="post" action="/conversations" ref={this.formRef}>
+          <input type="hidden" name="authenticity_token" value={Auth.getAuthenticityToken()} />
+          <input type="hidden" name="conversation[user_1_id]" value={this.props.current_user_id} />
+          <input type="hidden" name="conversation[user_2_id]" />
+        </form>
       </div>
     );
   }

@@ -1,6 +1,5 @@
 class DeviseMailer < Devise::Mailer
   include DefaultUrlOptions
-
-  default from: 'from@example.com'
+  default from: 'mess.ruby@gmail.com'
   layout 'mailer'
 end

@@ -6,13 +6,20 @@ class AccountsController < ApplicationController
   end
 
   def create
+    @user = User.new(user_params)
+    @account = Account.new(account_params)
+
     account_result = create_account
-    (render(:new) && return) unless account_result.success?
+    (render(:new, location: new_account_path) && return) unless account_result.success?
 
     create_tenant
 
     user_result = create_user_in_new_tenant
-    (render(:new) && return) unless user_result.success?
+    unless user_result.success?
+      clean_up_account
+      render :new, location: new_account_path
+      return
+    end
 
     redirect_to new_account_path,
                 notice: 'Your account has been successfully created, please confirm your email to continue'
@@ -46,5 +53,18 @@ class AccountsController < ApplicationController
       end
       OpenStruct.new(success?: @user.persisted?)
     end
+  end
+
+  def clean_up_account
+    destroy_account
+    destroy_tenant
+  end
+
+  def destroy_account
+    @account.destroy
+  end
+
+  def destroy_tenant
+    Apartment::Tenant.drop @account.subdomain
   end
 end

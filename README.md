@@ -1,5 +1,6 @@
 # MessRb (mess-ahr-bee)
 A little instant messenger built as a refresher for RoR and to try out Rails 5 and ActionCable. With decent test coverage using `rspec` and a decent UI using `bootstrap-4`
+https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable
 
 ## Usage
 Just clone the repo, run:

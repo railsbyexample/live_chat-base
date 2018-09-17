@@ -37,15 +37,13 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       if @conversation.persisted?
         format.html do
-          @message = Message.new
-          render :show,
-            status: conversation_exists ? :ok : :created,
-            location: @conversation
+          redirect_to @conversation
         end
+
         format.json do
           render :show,
-            status: conversation_exists ? :ok : :created,
-            location: @conversation
+                 status: conversation_exists ? :ok : :created,
+                 location: conversation_url(@conversation)
         end
       else
         format.html { redirect_to '/users' }
