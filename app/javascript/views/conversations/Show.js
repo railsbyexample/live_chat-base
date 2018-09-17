@@ -13,6 +13,8 @@ class Show extends React.Component {
   constructor(props) {
     super(props)
 
+    this.scrollRef = React.createRef()
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEnter = this.handleEnter.bind(this)
@@ -29,6 +31,8 @@ class Show extends React.Component {
       { channel: 'UsersChannel' },
       { received: data => { this.handleMessageReceived(JSON.parse(data.message)) } }
     )
+
+    setTimeout(() => { this.scrollRef.current.scrollIntoView() }, 2000)
   }
 
   componentWillUnmount() {
@@ -49,6 +53,7 @@ class Show extends React.Component {
     if (message.conversation_id == this.props.conversation_id) {
       const messages = this.state.messages.concat(message)
       this.setState({ messages })
+      this.scrollRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
@@ -82,6 +87,8 @@ class Show extends React.Component {
             </Card>
           </div>
         ))}
+
+        <div ref={this.scrollRef} />
 
         <div className="pt-3" style={{ backgroundColor: 'white', position: 'fixed', bottom: 0, left: 0, right: 0 }}>
           <Form layout="horizontal" onSubmit={this.handleSubmit}>
