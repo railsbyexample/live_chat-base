@@ -5,7 +5,7 @@
     <%= devise_error_messages! %>
     <%= f.hidden_field :reset_password_token %>
 
-    <%= form_group :password, :password_field, f, label: 'New password' autofocus: true, autocomplete: "off" %>
+    <%= form_group :password, :password_field, f, label: 'New password', autofocus: true, autocomplete: "off" %>
     <%= form_group :password_confirmation, :password_field, f, label: 'Confirm new password', autocomplete: "off" %>
 
     <%= form_button 'Change my password', f %>
