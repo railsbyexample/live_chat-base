@@ -5,10 +5,9 @@ import { Avatar, Divider, Card, Button, Form, Input, Row, Col } from 'antd';
 import Cable from '../../services/Cable'
 import Auth from '../../services/Auth'
 
-const InputGroup = Input.Group
-const TextArea = Input.TextArea
-const FormItem = Form.Item
-const Meta = Card.Meta
+import ViewHeader from '../../components/ViewHeader'
+import LinkButton from '../../components/LinkButton'
+import ThumbnailCard from '../../components/ThumbnailCard'
 
 class Index extends React.Component {
   constructor(props) {
@@ -24,6 +23,9 @@ class Index extends React.Component {
   }
 
   render () {
+    const { current_user_id, add_conversation_icon, delete_icon } = this.props
+    const { users } = this.state
+
     const senderString = (conversation) => {
       return conversation.last_message.user_id == conversation.user_1_id
       ? `${conversation.user_1.name}: `
@@ -35,23 +37,28 @@ class Index extends React.Component {
       ? conversation.user_2
       : conversation.user_1
     }
+
     return (
       <div className="container">
-        <div className="mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h5 className="mb-0">Chats</h5>
-          <Button href="/users">New</Button>
-        </div>
+        <ViewHeader title="Conversations">
+          <LinkButton
+            text="New"
+            href="/users"
+            src={add_conversation_icon}
+          />
+        </ViewHeader>
         {this.state.conversations.map(conversation => (
-          <div key={conversation.id} className={`ant-card-compact mb-1`}>
-            <a href={`/conversations/${conversation.id}`}>
-              <Card style={{ cursor: 'pointer' }} onClick={this.handleSubmit}>
-                <Meta
-                  avatar={<Avatar src={otherUser(conversation).gravatar_url} />}
-                  description={otherUser(conversation).email}
-                />
-                {senderString(conversation)}{conversation.last_message.body}
-              </Card>
-            </a>
+
+          <div key={conversation.id}>
+            <ThumbnailCard
+              key={conversation.id}
+              deleteIcon={delete_icon}
+              imageUrl={otherUser(conversation).gravatar_url}
+              title={otherUser(conversation).name}
+              description={`${senderString(conversation)}${conversation.last_message.body}`}
+              href={`/conversations/${conversation.id}`}
+              onClick={() => { this.handleSubmit(user.id) }}
+            />
           </div>
         ))}
       </div>
