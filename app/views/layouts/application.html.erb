@@ -18,7 +18,7 @@
   </head>
 
   <body>
-    <%= react_component 'components/Navbar',
+    <%= react_component 'Navbar',
           title: application_title,
           current_user: current_user.to_json(methods: %i[name gravatar_url]),
           logo: image_url('logo.svg'),
