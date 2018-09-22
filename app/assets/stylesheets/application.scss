@@ -42,6 +42,7 @@ a {
   border: 0;
   border-radius: 0;
   border-bottom: 1px solid $purple-highlight;
+  background: none;
 
   &-menu {
     height: 52px;
@@ -56,9 +57,29 @@ a {
   }
 }
 
+.textarea {
+  background: $purple-background;
+  border: none;
+  border-image: none;
+  padding: 8px;
+  border-bottom: 1px solid $purple-highlight;
+
+  ::placeholder {
+    color: $purple-highlight;
+  }
+}
+
 .avatar {
   width: 36px;
   border-radius: 50%;
+
+  &-lg {
+    width: 42px;
+  }
+
+  &-sm  {
+    width: 24px;
+  }
 }
 
 .card {

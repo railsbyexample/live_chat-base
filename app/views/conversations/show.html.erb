@@ -1,5 +1,7 @@
 <%= react_component 'conversations/Show',
                     conversation_id: @conversation.id,
+                    conversation: @conversation.to_json(include: { user_1: { methods: %i[name gravatar_url] }, user_2: { methods: %i[name gravatar_url] } }),
                     messages: @conversation.messages.to_json(include: { user: { methods: %i[name gravatar_url] } }),
-                    current_user_id: current_user.id
+                    current_user_id: current_user.id,
+                    add_conversation_icon: image_url('add_conversation_icon.svg')
 %>

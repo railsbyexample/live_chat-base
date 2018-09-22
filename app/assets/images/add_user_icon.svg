@@ -7,11 +7,11 @@
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
         <g id="Assets" transform="translate(-32.000000, -240.000000)" stroke="#845EC2">
             <g id="Add-user-icon" transform="translate(32.000000, 240.000000)">
-                <g id="User-icon" transform="translate(4.000000, 5.269231)" stroke-linejoin="round" stroke-width="1.5">
-                    <path d="M11.3186941,18.2379499 C12.287834,16.9075946 12.5464791,16.1586148 12.5464791,14.249438 C12.5464791,10.0752795 9.73785411,6.69145554 6.27323957,6.69145554 C2.80862502,6.69145554 0,10.0752795 0,14.249438 C0,16.1610664 0.589064511,17.9069347 1.56042991,19.2379347 L11.3186941,18.2379499 Z" id="Oval-3"></path>
-                    <circle id="Oval-2" cx="6.69145554" cy="3.34572777" r="3.34572777"></circle>
+                <g id="User-icon" transform="translate(3.000000, 2.000000)" stroke-linejoin="round" stroke-width="1.5">
+                    <path d="M13.532116,21.8044637 C14.6907757,20.2139513 15,19.3185051 15,17.0359802 C15,12.0455461 11.6421356,8 7.5,8 C3.35786438,8 0,12.0455461 0,17.0359802 C0,19.3214362 0.704258747,21.408717 1.86557905,23 L13.532116,21.8044637 Z" id="Oval-3"></path>
+                    <circle id="Oval-2" cx="8" cy="4" r="4"></circle>
                 </g>
-                <g id="Plus-sign" transform="translate(19.769231, 2.000000)" stroke-width="2">
+                <g id="Plus-sign" transform="translate(18.769231, 3.000000)" stroke-width="2">
                     <path d="M3.69230769,0 L3.69230769,7.38461538" id="Path-11"></path>
                     <path d="M7.38461538,3.69230769 L0,3.69230769" id="Path-12"></path>
                 </g>

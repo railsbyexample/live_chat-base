@@ -4,6 +4,9 @@ import { Avatar, Card, Button, Form, Input } from 'antd';
 
 import Cable from '../../services/Cable'
 
+import AvatarHeader from '../../components/AvatarHeader'
+import MessageBox from '../../components/MessageBox'
+
 const InputGroup = Input.Group
 const TextArea = Input.TextArea
 const FormItem = Form.Item
@@ -22,7 +25,8 @@ class Show extends React.Component {
 
     this.state = {
       message: '',
-      messages: JSON.parse(this.props.messages)
+      messages: JSON.parse(this.props.messages),
+      conversation: JSON.parse(this.props.conversation)
     }
   }
 
@@ -32,7 +36,7 @@ class Show extends React.Component {
       { received: data => { this.handleMessageReceived(JSON.parse(data.message)) } }
     )
 
-    setTimeout(() => { this.scrollRef.current.scrollIntoView() }, 2000)
+    setTimeout(() => { this.scrollRef.current.scrollIntoView() }, 3000)
   }
 
   componentWillUnmount() {
@@ -74,40 +78,46 @@ class Show extends React.Component {
     let userMessageMargin = (message) => (message.user_id == this.props.current_user_id ? 'ml-5' : 'mr-5')
     let userMessageBackground = (message) => (message.user_id == this.props.current_user_id ? { backgroundColor: '#eee' } : {})
 
+    const otherUser = this.state.conversation.user_1_id == this.props.current_user_id
+      ? this.state.conversation.user_2
+      : this.state.conversation.user_1
+
     return (
       <div className="container">
+        <AvatarHeader
+          imageUrl={otherUser.gravatar_url}
+          title={otherUser.name}
+          description={otherUser.email}
+        />
+
         {this.state.messages.map(message => (
-          <div key={message.id} className={`ant-card-compact mb-1 ${userMessageMargin(message)}`}>
-            <Card style={userMessageBackground(message)}>
-              <Meta
-                avatar={<Avatar src={message.user.gravatar_url} />}
-                description={message.user.name}
-              />
-              {message.body}
-            </Card>
-          </div>
+          <MessageBox
+            key={message.id}
+            imageUrl={message.user.gravatar_url}
+            text={message.body}
+            received={!(message.user_id == this.props.current_user_id)}
+          />
         ))}
 
         <div ref={this.scrollRef} />
 
-        <div className="pt-3" style={{ backgroundColor: 'white', position: 'fixed', bottom: 0, left: 0, right: 0 }}>
-          <Form layout="horizontal" onSubmit={this.handleSubmit}>
-            <FormItem>
-              <InputGroup compact>
-                <TextArea
-                  style={{ width: '80%', height: '94px' }}
-                  placeholder="Enter message"
-                  onChange={this.handleChange}
-                  onKeyPress={this.handleEnter}
-                  value={this.state.message}
-                />
+        <div className="fixed-bottom container py-2 bg-white">
+          <form onSubmit={this.handleSubmit} className="d-flex align-items-stretch">
+            <textarea
+              placeholder="Enter message"
+              className="w-100 textarea"
+              onChange={this.handleChange}
+              onKeyPress={this.handleEnter}
+              value={this.state.message}
+              style={{ height: '120px' }}
+            />
 
-                <Button style={{ width: '20%', height: '94px' }} htmlType="submit">Send</Button>
-              </InputGroup>
-            </FormItem>
-          </Form>
+            <button className="btn btn-underline" type="submit">
+              <img src={this.props.add_conversation_icon} />
+            </button>
+          </form>
         </div>
-        <div style={{width: '100%', height: '134px' }} />
+        <div style={{width: '100%', height: '120px' }} />
       </div>
     );
   }
