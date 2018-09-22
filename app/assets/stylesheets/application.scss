@@ -12,4 +12,83 @@
  *
  */
 
+$purple-primary: #612D7B;
+$purple-highlight: #B39CD0;
+$purple-highlight-rgba: rgba(179, 156, 208, 1);
+$purple-background: rgba(179, 156, 208, .1);
+$purple-icon: #845EC2;
+
+$primary: $purple-primary;
+$font-family-base: 'Muli', sans-serif;
+
 @import "bootstrap";
+
+body {
+  font-family: $font-family-base;
+  font-size: 16px;
+}
+
+a {
+  * {
+    color: $purple-icon
+  }
+}
+
+.btn-underline {
+  box-sizing: border-box;
+  padding: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid $purple-highlight;
+  background: none;
+
+  &-menu {
+    height: 52px;
+  }
+
+  &:hover {
+    border-bottom: 2px solid $purple-icon;
+  }
+
+  &.active {
+    border-bottom: 2px solid $purple-icon;
+  }
+}
+
+.textarea {
+  background: $purple-background;
+  border: none;
+  border-image: none;
+  padding: 8px;
+  border-bottom: 1px solid $purple-highlight;
+
+  ::placeholder {
+    color: $purple-highlight;
+  }
+}
+
+.avatar {
+  width: 36px;
+  border-radius: 50%;
+
+  &-lg {
+    width: 42px;
+  }
+
+  &-sm  {
+    width: 24px;
+  }
+}
+
+.card {
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid $purple-highlight;
+  background-color: $purple-background;
+
+  &-body {
+    padding: 12px 8px;
+  }
+}

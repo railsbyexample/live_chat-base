@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>add_user_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Assets" transform="translate(-32.000000, -240.000000)" stroke="#845EC2">
+            <g id="Add-user-icon" transform="translate(32.000000, 240.000000)">
+                <g id="User-icon" transform="translate(3.000000, 2.000000)" stroke-linejoin="round" stroke-width="1.5">
+                    <path d="M13.532116,21.8044637 C14.6907757,20.2139513 15,19.3185051 15,17.0359802 C15,12.0455461 11.6421356,8 7.5,8 C3.35786438,8 0,12.0455461 0,17.0359802 C0,19.3214362 0.704258747,21.408717 1.86557905,23 L13.532116,21.8044637 Z" id="Oval-3"></path>
+                    <circle id="Oval-2" cx="8" cy="4" r="4"></circle>
+                </g>
+                <g id="Plus-sign" transform="translate(18.769231, 3.000000)" stroke-width="2">
+                    <path d="M3.69230769,0 L3.69230769,7.38461538" id="Path-11"></path>
+                    <path d="M7.38461538,3.69230769 L0,3.69230769" id="Path-12"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

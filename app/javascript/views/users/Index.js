@@ -1,14 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Avatar, Divider, Card, Button, Form, Input, Row, Col } from 'antd';
 
 import Cable from '../../services/Cable'
 import Auth from '../../services/Auth'
 
-const InputGroup = Input.Group
-const TextArea = Input.TextArea
-const FormItem = Form.Item
-const Meta = Card.Meta
+import ViewHeader from '../../components/ViewHeader'
+import LinkButton from '../../components/LinkButton'
+import ThumbnailCard from '../../components/ThumbnailCard'
 
 class Index extends React.Component {
   constructor(props) {
@@ -19,7 +17,6 @@ class Index extends React.Component {
     }
 
     this.formRef = React.createRef()
-
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -32,26 +29,33 @@ class Index extends React.Component {
   }
 
   render () {
+    const { current_user_id, add_user_icon, delete_icon } = this.props
+    const { users } = this.state
+
     return (
       <div className="container">
-        <div className="mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h5 className="mb-0">Users</h5>
-          <Button href="/users/invitation/new">Invite</Button>
-        </div>
-        {this.state.users.map(user => (
-          <div key={user.id} className={`ant-card-compact mb-1`}>
-            <Card style={{ cursor: 'pointer' }} onClick={() => { this.handleSubmit(user.id) }}>
-              <Meta
-                avatar={<Avatar src={user.gravatar_url} />}
-                description={user.email}
-              />
-              {user.name}
-            </Card>
-          </div>
+        <ViewHeader title="Users">
+          <LinkButton
+            text="Invite"
+            href="/users/invitation/new"
+            src={add_user_icon}
+          />
+        </ViewHeader>
+
+        {users.map(user => (
+          <ThumbnailCard
+            key={user.id}
+            deleteIcon={delete_icon}
+            imageUrl={user.gravatar_url}
+            title={user.name}
+            description={user.email}
+            onClick={() => { this.handleSubmit(user.id) }}
+          />
         ))}
+
         <form method="post" action="/conversations" ref={this.formRef}>
           <input type="hidden" name="authenticity_token" value={Auth.getAuthenticityToken()} />
-          <input type="hidden" name="conversation[user_1_id]" value={this.props.current_user_id} />
+          <input type="hidden" name="conversation[user_1_id]" value={current_user_id} />
           <input type="hidden" name="conversation[user_2_id]" />
         </form>
       </div>
