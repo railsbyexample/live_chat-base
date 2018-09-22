@@ -22,15 +22,15 @@ class Navbar extends React.Component {
 
           {this.state.currentUser
             ? <div className="d-flex justify-content-end">
-                <a href="/conversations" className={`btn btn-underline ${this.props.active === 'conversations' ? 'active' : ''}`} >
+                <a href="/conversations" className={`btn btn-underline btn-underline-menu ${this.props.active === 'conversations' ? 'active' : ''}`} >
                   <img src={this.props.conversations_icon} style={{ width: '36px' }} />
                   <span className="ml-1 d-none d-md-inline-block">Conversations</span>
                 </a>
-                <a href="/users" className={`btn btn-underline ${this.props.active === 'users' ? 'active' : ''}`} >
+                <a href="/users" className={`btn btn-underline btn-underline-menu ${this.props.active === 'users' ? 'active' : ''}`} >
                   <img src={this.props.users_icon} style={{ width: '36px' }} />
                   <span className="ml-1 d-none d-md-inline-block">Users</span>
                 </a>
-                <a href="/users/edit" className={`btn btn-underline ${this.props.active === 'registrations' ? 'active' : ''}`} >
+                <a href="/users/edit" className={`btn btn-underline btn-underline-menu ${this.props.active === 'registrations' ? 'active' : ''}`} >
                   <img src={this.state.currentUser.gravatar_url} className="avatar" style={{ width: '36px' }} />
                 </a>
               </div>

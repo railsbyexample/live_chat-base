@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>delete_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Assets" transform="translate(-68.000000, -141.000000)" stroke="#845EC2" stroke-width="2">
+            <g id="Delete-icon" transform="translate(68.000000, 141.000000)">
+                <g id="Can" transform="translate(6.000000, 6.000000)">
+                    <path d="M0.956232136,19.1813143 C1.54391647,19.7162387 2.64181263,19.9837009 4.2499206,19.9837009 L12.7497618,19.9837009 C14.4332806,20.0610846 15.5652785,19.8629206 16.1457555,19.389209 C16.7262325,18.9154974 17.0108748,17.9575795 16.9996824,16.5154553 L16.9996824,0 L0,0 L0,16.5154553 C0.0498037571,17.7577702 0.368547802,18.6463899 0.956232136,19.1813143 Z" id="Path-6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M5.1,16.6666667 L5.1,3.33333333" id="Path-7"></path>
+                    <path d="M8.5,16.6666667 L8.5,3.33333333" id="Path-8"></path>
+                    <path d="M11.9,16.6666667 L11.9,3.33333333" id="Path-8"></path>
+                </g>
+                <g id="Lid" transform="translate(4.000000, 2.000000)" stroke-linecap="round">
+                    <path d="M0.485711349,1.5 L20.5952405,1.5" id="Path-9"></path>
+                    <polyline id="Path-10" points="6.63157895 1 7.69612245 0 13.264373 0 14.3684211 1"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

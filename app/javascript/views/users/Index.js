@@ -34,21 +34,37 @@ class Index extends React.Component {
   render () {
     return (
       <div className="container">
-        <div className="mb-3" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h5 className="mb-0">Users</h5>
-          <Button href="/users/invitation/new">Invite</Button>
+        <div className="mb-4 d-flex align-items-center justify-content-between">
+          <h4 className="font-weight-bold text-primary mb-0">Users</h4>
+          <a href="/users/invitation/new" className="btn btn-underline d-flex align-items-center">
+            <span className="mr-2 text-primary">Invite</span>
+            <img src={this.props.add_user_icon} style={{ width: '24px' }} />
+          </a>
         </div>
+
         {this.state.users.map(user => (
-          <div key={user.id} className={`ant-card-compact mb-1`}>
-            <Card style={{ cursor: 'pointer' }} onClick={() => { this.handleSubmit(user.id) }}>
-              <Meta
-                avatar={<Avatar src={user.gravatar_url} />}
-                description={user.email}
-              />
-              {user.name}
-            </Card>
+          <div key={user.id} className="card mb-3">
+            <div
+              className="card-body d-flex justify-content-between align-items-end"
+              style={{ cursor: 'pointer' }}
+              onClick={() => { this.handleSubmit(user.id) }}
+            >
+              <div className="d-flex align-items-center">
+                <img className="avatar" src={user.gravatar_url} />
+
+                <div className="px-3">
+                  <div className="text-primary font-weight-bold">{user.name}</div>
+                  <div className="text-primary">{user.email}</div>
+                </div>
+              </div>
+
+              <a href='#'>
+                <img className="avatar" src={this.props.delete_icon} style={{ width: '24px' }} />
+              </a>
+            </div>
           </div>
         ))}
+
         <form method="post" action="/conversations" ref={this.formRef}>
           <input type="hidden" name="authenticity_token" value={Auth.getAuthenticityToken()} />
           <input type="hidden" name="conversation[user_1_id]" value={this.props.current_user_id} />
