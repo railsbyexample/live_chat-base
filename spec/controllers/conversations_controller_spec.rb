@@ -2,45 +2,36 @@ require 'rails_helper'
 
 RSpec.describe ConversationsController, type: :controller do
   describe 'POST /conversations' do
-
     describe 'when conversation with user already exists' do
-      before :each do
-        @user_1 = create :user
-        @user_2 = create :user
-        conversation = create :conversation, user_1: @user_1, user_2: @user_2
+      let(:user_1) { create :user }
+      let(:user_2) { create :user }
 
-        sign_in @user_1
+      let!(:conversation) { create :conversation, user_1: user_1, user_2: user_2 }
+
+      before(:each) { sign_in user_1 }
+
+      it 'renders the existing conversation for ordered users' do
+        post :create, params: { conversation: { user_1_id: user_1.id, user_2_id: user_2.id } }
+        expect(response).to redirect_to(conversation)
       end
 
-      it 'should render the existing conversation for ordered users' do
-        post :create, params: { conversation: { user_1_id: @user_1.id, user_2_id: @user_2.id } }
-        assert_response :ok
-      end
-
-      it 'should render the existing conversation for inverted users' do
-        post :create, params: { conversation: { user_1_id: @user_2.id, user_2_id: @user_1.id } }
-        assert_response :ok
+      it 'renders the existing conversation for inverted users' do
+        post :create, params: { conversation: { user_1_id: user_2.id, user_2_id: user_1.id } }
+        expect(response).to redirect_to(conversation)
       end
     end
 
     describe 'when no conversation with user exists' do
-      before :each do
-        @user_1 = create :user
-        @user_2 = create :user
+      let(:user_1) { create :user }
+      let(:user_2) { create :user }
 
-        sign_in @user_1
-      end
+      before(:each) { sign_in user_1 }
 
-      it 'should render the existing conversation for ordered users' do
-        post :create, params: { conversation: { user_1_id: @user_1.id, user_2_id: @user_2.id } }
-        assert_response :created
-      end
-
-      it 'should render the existing conversation for inverted users' do
-        post :create, params: { conversation: { user_1_id: @user_2.id, user_2_id: @user_1.id } }
-        assert_response :success
+      it 'creates a new conversation' do
+        expect do
+          post :create, params: { conversation: { user_1_id: user_1.id, user_2_id: user_2.id } }
+        end.to change(Conversation, :count).by(1)
       end
     end
-
   end
 end

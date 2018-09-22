@@ -26,16 +26,15 @@ gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 3.0'
 gem 'sidekiq'
 
-gem 'sendgrid-actionmailer'
 gem 'react-rails'
+gem 'sendgrid-actionmailer'
 gem 'webpacker', '~> 3.5'
 
 gem 'haml-rails'
 
-gem 'figaro'
 gem 'bootstrap', '~> 4.1'
-gem 'devise'
-gem 'devise_invitable'
+gem 'devise', path: '../devise'
+gem 'figaro'
 
 group :development, :test do
   gem 'byebug'
