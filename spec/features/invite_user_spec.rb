@@ -1,21 +1,16 @@
 RSpec.feature 'InviteUser', type: :feature do
-  before { Capybara.app_host = 'http://test-tenant.localhost:3000' }
-  after { Capybara.app_host = 'http://localhost:3000' }
-
   before(:each) { clear_emails }
   before(:each) do
-    Apartment::Tenant.switch 'test-tenant' do
-      user = FactoryBot.create :user, admin_level: :owner
-      sign_in user
-    end
+    user = FactoryBot.create :user
+    sign_in user
   end
 
-  scenario 'an owner creates an invitation' do
+  scenario 'a user creates an invitation' do
     visit '/users/invitation/new'
     fill_in 'Email', with: 'test@user.com'
     click_button I18n.t('devise.invitations.new.submit_button')
 
-    # Notifies the admin
+    # Notifies the inviter
     expect(page)
       .to have_text(
         I18n.t(

@@ -1,13 +1,8 @@
 RSpec.feature 'AcceptInvitation', type: :feature do
-  before { Capybara.app_host = 'http://test-tenant.localhost:3000' }
-  after { Capybara.app_host = 'http://localhost:3000' }
-
   before(:each) { clear_emails }
 
   scenario 'the user clicks on the email link' do
-    Apartment::Tenant.switch 'test-tenant' do
-      User.invite! email: 'test3@user.com'
-    end
+    User.invite! email: 'test3@user.com'
 
     open_email('test3@user.com')
     current_email.click_link I18n.t('devise.mailer.invitation_instructions.accept')
@@ -17,9 +12,7 @@ RSpec.feature 'AcceptInvitation', type: :feature do
   end
 
   scenario 'the user enters the correct information' do
-    Apartment::Tenant.switch 'test-tenant' do
-      User.invite! email: 'test4@user.com'
-    end
+    User.invite! email: 'test4@user.com'
 
     open_email('test4@user.com')
     current_email.click_link I18n.t('devise.mailer.invitation_instructions.accept')
@@ -34,9 +27,7 @@ RSpec.feature 'AcceptInvitation', type: :feature do
   end
 
   scenario 'the user enters incomplete information' do
-    Apartment::Tenant.switch 'test-tenant' do
-      User.invite! email: 'test4@user.com'
-    end
+    User.invite! email: 'test4@user.com'
 
     open_email('test4@user.com')
     current_email.click_link I18n.t('devise.mailer.invitation_instructions.accept')

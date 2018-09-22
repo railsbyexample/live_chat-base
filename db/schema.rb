@@ -15,12 +15,6 @@ ActiveRecord::Schema.define(version: 2018_08_26_222932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accounts", force: :cascade do |t|
-    t.string "subdomain"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "conversations", id: :serial, force: :cascade do |t|
     t.integer "user_1_id"
     t.integer "user_2_id"
@@ -62,7 +56,6 @@ ActiveRecord::Schema.define(version: 2018_08_26_222932) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "admin_level", default: 0, null: false
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"

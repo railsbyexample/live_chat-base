@@ -1,14 +1,6 @@
 module Auth
   class InvitationsController < Devise::InvitationsController
-    before_action :block_public_tenant!
-    before_action :authorize_owner!, only: %i[new create]
-
-    def create
-      super do |user|
-        user.admin_level = :admin
-        user.save(validate: false)
-      end
-    end
+    before_action :authenticate_user!
 
     private
 
@@ -16,10 +8,9 @@ module Auth
       users_path
     end
 
-    # Only allow superadmin to invite new users
+    # Only allow signed in users to invite others
     def authenticate_inviter!
-      return if current_user.try(:owner?)
-      redirect_to(root_url) && return
+      authenticate_user!
     end
   end
 end

@@ -12,7 +12,6 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/email/rspec'
 require 'devise'
-require 'support/apartment'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
