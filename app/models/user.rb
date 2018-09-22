@@ -5,8 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable
 
-  enum admin_level: { non_admin: 0, owner: 1, admin: 2 }
-
   has_many :messages, dependent: :destroy
 
   has_many :user_1_conversations, class_name: 'Conversation', foreign_key: 'user_1_id', dependent: :destroy

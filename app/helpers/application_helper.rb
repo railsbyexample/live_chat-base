@@ -3,10 +3,6 @@ module ApplicationHelper
     image_tag user ? "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email)}?s=#{opts.delete(:size) { 40 }}" : '', opts
   end
 
-  def application_title
-    Apartment::Tenant.current == 'public' ? 'MessRb' : "#{Apartment::Tenant.current.titleize}"
-  end
-
   def form_group(field_name, field_type, form, options={})
     render partial: 'shared/form_group',
            locals: {

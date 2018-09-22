@@ -33,8 +33,6 @@ gem 'webpacker', '~> 3.5'
 gem 'haml-rails'
 
 gem 'figaro'
-gem 'apartment'
-gem 'apartment-activejob'
 gem 'bootstrap', '~> 4.1'
 gem 'devise'
 gem 'devise_invitable'
