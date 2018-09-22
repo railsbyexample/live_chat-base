@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def application_title
-    Apartment::Tenant.current == 'public' ? 'MessRb' : "#{Apartment::Tenant.current.titleize} on MessRb"
+    Apartment::Tenant.current == 'public' ? 'MessRb' : "#{Apartment::Tenant.current.titleize}"
   end
 
   def form_group(field_name, field_type, form, options={})

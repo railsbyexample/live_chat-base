@@ -13,3 +13,37 @@
  */
 
 @import "bootstrap";
+
+$purple-primary: #612D7B;
+$purple-highlight: #B39CD0;
+$purple-highlight-rgba: rgba(179, 156, 208, 1);
+$purple-background: rgba(179, 156, 208, .1);
+$purple-icon: #845EC2;
+
+body {
+  font-family: 'Muli', sans-serif;
+}
+
+.btn-underline {
+  box-sizing: border-box;
+  height: 52px;
+  padding: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid $purple-highlight;
+
+  &:hover {
+    border-bottom: 2px solid $purple-icon;
+  }
+
+  &.active {
+    border-bottom: 2px solid $purple-icon;
+  }
+}
+
+.avatar {
+  width: 36px;
+  border-radius: 50%;
+}

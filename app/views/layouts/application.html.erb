@@ -11,6 +11,8 @@
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_pack_tag 'application' %>
 
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,800" rel="stylesheet">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="ws-host" content="<%= "ws://#{app_host_with_port}/cable" %>"
   </head>
@@ -19,8 +21,12 @@
     <%= react_component 'components/Navbar',
           title: application_title,
           current_user: current_user.to_json(methods: %i[name gravatar_url]),
+          logo: image_url('logo.svg'),
           github_logo: image_url('github_octocat.png'),
-          perezperret_logo: image_url('perezperret_logo.png')
+          perezperret_logo: image_url('perezperret_logo.png'),
+          conversations_icon: image_url('conversations_icon.svg'),
+          users_icon: image_url('users_icon.svg'),
+          active: controller_name
     %>
 
     <% if notice && !notice.empty? %>

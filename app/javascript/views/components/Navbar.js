@@ -13,46 +13,37 @@ class Navbar extends React.Component {
   }
   render() {
     return(
-      <div style={{ position: 'relative', zIndex: 2 }}>
-        <div style={{ backgroundColor: 'white', position: 'fixed', top: 0, left: 0, right: 0 }} className="container py-3">
-          <div className="row">
-            <div className={this.state.currentUser ? 'col-12 col-md-3' : 'col-6 col-md-6'}>
-              <h5 className="mb-0">{this.props.title}</h5>
-            </div>
-
-            {this.state.currentUser
-              ? <div className="col-12 col-md-9 d-flex justify-content-end">
-                  <Menu mode="horizontal">
-                    <Menu.Item key="chats">
-                      <a href="/conversations">
-                        <Icon type="message" />Chats
-                      </a>
-                    </Menu.Item>
-                    <Menu.Item key="users">
-                      <a href="/users">
-                        <Icon type="team" />Users
-                      </a>
-                    </Menu.Item>
-                    <Menu.Item key="profile">
-                      <a href="/users/edit">
-                        <Avatar src={this.state.currentUser.gravatar_url} />
-                      </a>
-                    </Menu.Item>
-                  </Menu>
-                </div>
-              : <div className="col-6 col-md-6 d-flex justify-content-end align-items-center">
-                  <a href="https://perezperret.com" className="ml-2">
-                    <img src={this.props.perezperret_logo} style={{ width: '40px' }} />
-                  </a>
-                  <a href="https://github.com/perezperret/mess-rb" className="ml-2">
-                    <img src={this.props.github_logo} style={{ width: '40px' }} />
-                  </a>
-                </div>
-            }
+      <div className="container py-3">
+        <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex align-items-center">
+            <img src={this.props.logo} style={{ width: '60px' }} />
+            <h5 className="ml-1 mb-0 d-none d-md-inline-block">{this.props.title}</h5>
           </div>
+
+          {this.state.currentUser
+            ? <div className="d-flex justify-content-end">
+                <a href="/conversations" className={`btn btn-underline ${this.props.active === 'conversations' ? 'active' : ''}`} >
+                  <img src={this.props.conversations_icon} style={{ width: '36px' }} />
+                  <span className="ml-1 d-none d-md-inline-block">Conversations</span>
+                </a>
+                <a href="/users" className={`btn btn-underline ${this.props.active === 'users' ? 'active' : ''}`} >
+                  <img src={this.props.users_icon} style={{ width: '36px' }} />
+                  <span className="ml-1 d-none d-md-inline-block">Users</span>
+                </a>
+                <a href="/users/edit" className={`btn btn-underline ${this.props.active === 'registrations' ? 'active' : ''}`} >
+                  <img src={this.state.currentUser.gravatar_url} className="avatar" style={{ width: '36px' }} />
+                </a>
+              </div>
+            : <div className="col-6 col-md-6 d-flex justify-content-end align-items-center">
+                <a href="https://perezperret.com" className="mx-2">
+                  <img src={this.props.perezperret_logo} style={{ width: '36px' }} />
+                </a>
+                <a href="https://github.com/perezperret/mess-rb" className="mx-2">
+                  <img src={this.props.github_logo} style={{ width: '36px' }} />
+                </a>
+              </div>
+          }
         </div>
-        <div className="d-none d-md-block" style={{ width: '100%', height: '80px' }} />
-        <div className="d-block d-md-none" style={{ width: '100%', height: '104px' }} />
       </div>
     )
   }

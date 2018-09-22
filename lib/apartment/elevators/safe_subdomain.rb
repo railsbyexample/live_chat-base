@@ -7,11 +7,7 @@ module Apartment
         host = request.host
         last_subdomain = host.gsub(ENV['app_host'], '').split('.').last
 
-        tenant_name = last_subdomain.nil? || last_subdomain == 'www' ? 'public' : last_subdomain
-
-        puts "[TENANT NAME] #{tenant_name}"
-
-        tenant_name
+        last_subdomain.nil? || last_subdomain == 'www' ? 'public' : last_subdomain
       end
     end
   end
