@@ -1,22 +1,11 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- */
-
 $purple-primary: #612D7B;
 $purple-highlight: #B39CD0;
 $purple-highlight-rgba: rgba(179, 156, 208, 1);
 $purple-background: rgba(179, 156, 208, .1);
 $purple-icon: #845EC2;
+
+$success: #00C371;
+$success-accent: #6D9B7C;
 
 $primary: $purple-primary;
 $font-family-base: 'Muli', sans-serif;
@@ -26,12 +15,12 @@ $font-family-base: 'Muli', sans-serif;
 body {
   font-family: $font-family-base;
   font-size: 16px;
-  color: $purple-primary;
+  color: $primary;
 }
 
 a {
   * {
-    color: $purple-icon
+    color: $primary
   }
 }
 
@@ -56,6 +45,12 @@ a {
   &.active {
     border-bottom: 2px solid $purple-icon;
   }
+}
+
+.btn-success {
+  color: $white;
+  border: none;
+  border-bottom: 2px solid $success-accent;
 }
 
 .btn-clear {
