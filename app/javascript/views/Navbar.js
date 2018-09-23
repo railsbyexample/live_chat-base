@@ -1,8 +1,4 @@
 import React from 'react'
-import { Avatar, Menu, Icon } from 'antd';
-
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 class Navbar extends React.Component {
   constructor(props) {

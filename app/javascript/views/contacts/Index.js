@@ -48,6 +48,15 @@ class Index extends React.Component {
           />
         </ViewHeader>
 
+        {
+          this.state.contacts.length === 0
+          ? <div className="alert alert-warning">
+              <span>You have no one to talk to, yet. </span>
+              <a href="/contacts/new" className="alert-link">Try adding someone.</a>
+            </div>
+          : null
+        }
+
         {this.state.contacts.map(contact => (
           <div key={contact.id}>
             <ThumbnailCard

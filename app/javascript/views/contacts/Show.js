@@ -90,6 +90,14 @@ class Show extends React.Component {
           description={otherUser.email}
         />
 
+        {
+          this.state.messages.length === 0
+          ? <div className="alert alert-warning">
+              <span>This is the beggining of your conversation with {<strong>{otherUser.name}</strong>}.</span>
+            </div>
+          : null
+        }
+
         {this.state.messages.map(message => (
           <MessageBox
             key={message.id}

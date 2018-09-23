@@ -1,5 +1,6 @@
 import React from 'react'
 import Auth from '../services/Auth'
+import DefaultAvatar from '../services/Images'
 
 const ClickWrapper = ({ href, onClick, children }) => {
   if (href) { return <a href={href}>{children}</a> }
