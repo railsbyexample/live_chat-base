@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :contacts
+  resources :contacts, only: %i[new create update destroy]
   resources :conversations
   resources :messages
   resources :users, only: :index

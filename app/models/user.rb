@@ -21,6 +21,12 @@ class User < ApplicationRecord
     contacts.find_by('receiver_id = :id OR sender_id = :id', id: user_id)
   end
 
+  def confirmed_users
+    contacts.includes(%i[sender receiver]).confirmed.find_each.map do |contact|
+      contact.sender == self ? contact.receiver : contact.sender
+    end
+  end
+
   def conversations
     Conversation.where 'user_1_id = :id or user_2_id = :id', id: id
   end

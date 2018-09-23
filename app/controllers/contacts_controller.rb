@@ -15,7 +15,8 @@ class ContactsController < ApplicationController
 
   # GET /contacts/new
   def new
-    @contact = Contact.new
+    @unconfirmed_sent_contacts = current_user.contacts.unconfirmed.sent_by(current_user)
+    @unconfirmed_received_contacts = current_user.contacts.unconfirmed.received_by(current_user)
   end
 
   # GET /contacts/1/edit
@@ -27,6 +28,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new
     receiver_email = params[:contact][:email]
+
 
     if receiver_email == current_user.email
       redirect_to new_contact_url, alert: "You can't add yourself, for now."
@@ -71,7 +73,7 @@ class ContactsController < ApplicationController
     @contact.confirm
 
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully updated.' }
+      format.html { redirect_to new_contact_url, notice: 'Contact was successfully accepted.' }
       format.json { render :show, status: :ok, location: @contact }
     end
   end

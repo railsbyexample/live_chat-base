@@ -1,12 +1,12 @@
 import React from 'react'
 
-const ClickWrapper = ({ href, onClick, children }) => (
-  href
-  ? <a href={href}>{children}</a>
-  : <div onClick={onClick}>{children}</div>
-)
+const ClickWrapper = ({ href, onClick, children }) => {
+  if (href) { return <a href={href}>{children}</a> }
+  if (onClick) { return <div onClick={onClick}>{children}</div> }
+  return <div>{children}</div>
+}
 
-const ThumbnailCard = ({ deleteIcon, imageUrl, href, onClick, title, description }) => (
+const ThumbnailCard = ({ children, deleteIcon, imageUrl, href, onClick, title, description }) => (
   <div className="card mb-3">
     <div className="card-body d-flex justify-content-between align-items-end" style={{ cursor: 'pointer' }}>
       <ClickWrapper href={href} onClick={onClick}>
@@ -23,6 +23,7 @@ const ThumbnailCard = ({ deleteIcon, imageUrl, href, onClick, title, description
       <a href='#'>
         <img className="avatar" src={deleteIcon} style={{ width: '24px' }} />
       </a>
+      {children}
     </div>
   </div>
 )

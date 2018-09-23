@@ -1,33 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe ContactsController, type: :controller do
-  describe 'GET #index' do
-    let(:user) { create :user }
-    before(:each) { sign_in user }
-
-    it 'returns a success response' do
-      get :index, params: {}
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET #new' do
     let(:user) { create :user }
     before(:each) { sign_in user }
 
     it 'returns a success response' do
       get :new, params: {}
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET #edit' do
-    let(:user) { create :user }
-    before(:each) { sign_in user }
-
-    it 'returns a success response' do
-      contact = create :contact, sender: user
-      get :edit, params: { id: contact.to_param }
       expect(response).to be_successful
     end
   end
