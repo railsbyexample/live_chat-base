@@ -27,7 +27,6 @@ gem 'redis', '~> 3.0'
 gem 'sidekiq'
 
 gem 'react-rails'
-gem 'sendgrid-actionmailer'
 gem 'webpacker', '~> 3.5'
 
 gem 'haml-rails'
