@@ -73,7 +73,7 @@ class ContactsController < ApplicationController
     @contact.confirm
 
     respond_to do |format|
-      format.html { redirect_to new_contact_url, notice: 'Contact was successfully accepted.' }
+      format.html { redirect_to contacts_url, notice: 'Contact was successfully accepted.' }
       format.json { render :show, status: :ok, location: @contact }
     end
   end
@@ -88,7 +88,7 @@ class ContactsController < ApplicationController
 
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+      format.html { redirect_to contacts_url, notice: 'Contact was successfully deleted.' }
       format.json { head :no_content }
     end
   end

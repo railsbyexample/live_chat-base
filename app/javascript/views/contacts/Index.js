@@ -53,6 +53,7 @@ class Index extends React.Component {
             <ThumbnailCard
               key={contact.id}
               deleteIcon={delete_icon}
+              deleteAction={`/contacts/${contact.id}`}
               imageUrl={otherUser(contact).gravatar_url}
               title={otherUser(contact).name}
               description={contact.last_message && `${senderString(contact)}${contact.last_message.body}`}
