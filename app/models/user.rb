@@ -32,8 +32,4 @@ class User < ApplicationRecord
     return full_name if full_name.present?
     email.split('@')[0]
   end
-
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
-  end
 end
