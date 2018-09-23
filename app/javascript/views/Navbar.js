@@ -16,8 +16,10 @@ class Navbar extends React.Component {
       <div className="container py-3">
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
-            <img src={this.props.logo} style={{ width: '60px' }} />
-            <h5 className="ml-1 mb-0 d-none d-md-inline-block">{this.props.title}</h5>
+            <a href="/">
+              <img src={this.props.logo} style={{ width: '60px' }} />
+              <h5 className="ml-1 mb-0 d-none d-md-inline-block">{this.props.title}</h5>
+            </a>
           </div>
 
           {this.state.currentUser
