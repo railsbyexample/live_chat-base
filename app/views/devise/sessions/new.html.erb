@@ -7,9 +7,11 @@
     <%= form_group :password, :password_field, f, autocomplete: "off" %>
 
     <% if devise_mapping.rememberable? -%>
-      <div class="custom-control custom-checkbox">
-        <%= f.check_box :remember_me, class: 'custom-control-input' %>
-        <%= f.label :remember_me, class: 'custom-control-label' %>
+      <div class="form-group">
+        <div class="custom-control custom-checkbox">
+          <%= f.check_box :remember_me, class: 'custom-control-input' %>
+          <%= f.label :remember_me, class: 'custom-control-label' %>
+        </div>
       </div>
     <% end -%>
 
