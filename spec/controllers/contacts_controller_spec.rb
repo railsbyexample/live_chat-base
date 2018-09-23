@@ -27,14 +27,14 @@ RSpec.describe ContactsController, type: :controller do
 
       it 'redirects to the users index' do
         post :create, params: { contact: valid_attributes }
-        expect(response).to redirect_to(users_url)
+        expect(response).to redirect_to(new_contact_url)
       end
     end
 
     context 'with invalid params' do
       let(:invalid_attributes) { { email: 'nonemail' } }
 
-      it "returns a success response (i.e. to display the 'new' template)" do
+      it 'redirects to the form' do
         post :create, params: { contact: invalid_attributes }
         expect(response).to redirect_to(new_contact_url)
       end

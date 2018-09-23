@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = current_user.contacts.confirmed
   end
 
   # GET /contacts/1
@@ -53,7 +53,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to users_url, notice: 'Contact was successfully created, they must accept your request before you can talk' }
+        format.html { redirect_to new_contact_url, notice: 'Contact was successfully created, they must accept your request before you can talk' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }

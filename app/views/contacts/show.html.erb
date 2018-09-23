@@ -1,0 +1,7 @@
+<%= react_component 'contacts/Show',
+                    contact_id: @contact.id,
+                    contact: @contact.to_json(include: { sender: { methods: %i[name gravatar_url] }, receiver: { methods: %i[name gravatar_url] } }),
+                    messages: @contact.messages.to_json(include: { user: { methods: %i[name gravatar_url] } }),
+                    current_user_id: current_user.id,
+                    add_conversation_icon: image_url('add_conversation_icon.svg')
+%>

@@ -26,7 +26,7 @@ class Show extends React.Component {
     this.state = {
       message: '',
       messages: JSON.parse(this.props.messages),
-      conversation: JSON.parse(this.props.conversation)
+      contact: JSON.parse(this.props.contact)
     }
   }
 
@@ -54,7 +54,7 @@ class Show extends React.Component {
   }
 
   handleMessageReceived(message) {
-    if (message.conversation_id == this.props.conversation_id) {
+    if (message.contact_id == this.props.contact_id) {
       const messages = this.state.messages.concat(message)
       this.setState({ messages })
       this.scrollRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -70,7 +70,7 @@ class Show extends React.Component {
 
   sendMessage(message) {
     this.messagesSubscription.perform('send_message',
-      { body: this.state.message, conversation_id: this.props.conversation_id }
+      { body: this.state.message, contact_id: this.props.contact_id }
     )
   }
 
@@ -78,9 +78,9 @@ class Show extends React.Component {
     let userMessageMargin = (message) => (message.user_id == this.props.current_user_id ? 'ml-5' : 'mr-5')
     let userMessageBackground = (message) => (message.user_id == this.props.current_user_id ? { backgroundColor: '#eee' } : {})
 
-    const otherUser = this.state.conversation.user_1_id == this.props.current_user_id
-      ? this.state.conversation.user_2
-      : this.state.conversation.user_1
+    const otherUser = this.state.contact.sender_id == this.props.current_user_id
+      ? this.state.contact.receiver
+      : this.state.contact.sender
 
     return (
       <div className="container">

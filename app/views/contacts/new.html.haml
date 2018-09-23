@@ -1,7 +1,7 @@
 .container
-  %h5 Add new contact
+  %h5 Add people
 
-  = form_tag '/contacts', method: 'patch' do
+  = form_tag '/contacts', method: 'post' do
     .form-group
       = label_tag :email
       = email_field_tag 'contact[email]', '', class: 'form-control'
@@ -9,7 +9,7 @@
     .form-group
       = submit_tag 'Request contact', class: 'btn btn-primary btn-block'
 
-= react_component 'contacts/Index',
+= react_component 'contacts/New',
     unconfirmed_sent_contacts: @unconfirmed_sent_contacts.to_json(include: { sender: { methods: %i[name gravatar_url] }, receiver: { methods: %i[name gravatar_url] } }),
     unconfirmed_received_contacts: @unconfirmed_received_contacts.to_json(include: { sender: { methods: %i[name gravatar_url] }, receiver: { methods: %i[name gravatar_url] } }),
     current_user_id: current_user.id,

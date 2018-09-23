@@ -6,9 +6,10 @@ class UsersChannel < ApplicationCable::Channel
   def unsubscribed; end
 
   def send_message(data)
-    current_user.messages.create!(
+    Message.create!(
       body: data['body'],
-      conversation_id: data['conversation_id']
+      user_id: current_user.id,
+      contact_id: data['contact_id']
     )
   end
 end

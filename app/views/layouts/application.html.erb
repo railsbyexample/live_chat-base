@@ -26,7 +26,7 @@
           perezperret_logo: image_url('perezperret_logo.png'),
           conversations_icon: image_url('conversations_icon.svg'),
           users_icon: image_url('users_icon.svg'),
-          active: controller_name
+          active: "#{controller_name}/#{action_name}"
     %>
 
     <% if notice && !notice.empty? %>
