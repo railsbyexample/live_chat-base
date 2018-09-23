@@ -26,12 +26,18 @@
           perezperret_logo: image_url('perezperret_logo.png'),
           conversations_icon: image_url('conversations_icon.svg'),
           users_icon: image_url('users_icon.svg'),
-          active: controller_name
+          active: "#{controller_name}/#{action_name}"
     %>
 
     <% if notice && !notice.empty? %>
-    <div class="container my-2">
+    <div class="container py-2">
       <div class="alert alert-success mb-0"><%= notice %></div>
+    </div>
+    <% end %>
+
+    <% if alert && !alert.empty? %>
+    <div class="container py-2">
+      <div class="alert alert-danger mb-0"><%= alert %></div>
     </div>
     <% end %>
 

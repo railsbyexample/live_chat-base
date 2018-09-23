@@ -22,15 +22,15 @@ class Navbar extends React.Component {
 
           {this.state.currentUser
             ? <div className="d-flex justify-content-end">
-                <a href="/conversations" className={`btn btn-underline btn-underline-menu ${this.props.active === 'conversations' ? 'active' : ''}`} >
+                <a href="/contacts" className={`btn btn-underline btn-underline-menu ${this.props.active === 'contacts/index' ? 'active' : ''}`} >
                   <img src={this.props.conversations_icon} style={{ width: '36px' }} />
-                  <span className="ml-1 d-none d-md-inline-block">Conversations</span>
+                  <span className="ml-1 d-none d-md-inline-block">Chats</span>
                 </a>
-                <a href="/users" className={`btn btn-underline btn-underline-menu ${this.props.active === 'users' ? 'active' : ''}`} >
+                <a href="/contacts/new" className={`btn btn-underline btn-underline-menu ${this.props.active === 'contacts/new' ? 'active' : ''}`} >
                   <img src={this.props.users_icon} style={{ width: '36px' }} />
-                  <span className="ml-1 d-none d-md-inline-block">Users</span>
+                  <span className="ml-1 d-none d-md-inline-block">People</span>
                 </a>
-                <a href="/users/edit" className={`btn btn-underline btn-underline-menu ${this.props.active === 'registrations' ? 'active' : ''}`} >
+                <a href="/users/edit" className={`btn btn-underline btn-underline-menu ${this.props.active === 'registrations/edit' ? 'active' : ''}`} >
                   <img src={this.state.currentUser.gravatar_url} className="avatar" style={{ width: '36px' }} />
                 </a>
               </div>

@@ -1,12 +1,13 @@
 import React from 'react'
+import Auth from '../services/Auth'
 
-const ClickWrapper = ({ href, onClick, children }) => (
-  href
-  ? <a href={href}>{children}</a>
-  : <div onClick={onClick}>{children}</div>
-)
+const ClickWrapper = ({ href, onClick, children }) => {
+  if (href) { return <a href={href}>{children}</a> }
+  if (onClick) { return <div onClick={onClick}>{children}</div> }
+  return <div>{children}</div>
+}
 
-const ThumbnailCard = ({ deleteIcon, imageUrl, href, onClick, title, description }) => (
+const ThumbnailCard = ({ children, deleteAction, deleteIcon, imageUrl, href, onClick, title, description }) => (
   <div className="card mb-3">
     <div className="card-body d-flex justify-content-between align-items-end" style={{ cursor: 'pointer' }}>
       <ClickWrapper href={href} onClick={onClick}>
@@ -20,9 +21,19 @@ const ThumbnailCard = ({ deleteIcon, imageUrl, href, onClick, title, description
         </div>
       </ClickWrapper>
 
-      <a href='#'>
-        <img className="avatar" src={deleteIcon} style={{ width: '24px' }} />
-      </a>
+      {
+        deleteAction
+        ? <form action={deleteAction} method="post">
+            <input name="utf8" type="hidden" value="✓" />
+            <input name="_method" type="hidden" value="delete" />
+            <input name="authenticity_token" type="hidden" value={Auth.getAuthenticityToken()} />
+            <button type="submit" className="btn btn-clear">
+              <img src={deleteIcon} style={{ width: '24px' }} />
+            </button>
+          </form>
+        : null
+      }
+      {children}
     </div>
   </div>
 )

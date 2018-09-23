@@ -2,6 +2,7 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
+    <%= form_group :full_name, :text_field, f, autofocus: true, class: "form-control" %>
     <%= form_group :email, :email_field, f, autofocus: true, class: "form-control" %>
     <%= form_group :password, :password_field, f, autocomplete: "off", class: "form-control" %>
     <%= form_group :password_confirmation, :password_field, f, autocomplete: "off", class: "form-control" %>

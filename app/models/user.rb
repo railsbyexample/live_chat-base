@@ -7,22 +7,29 @@ class User < ApplicationRecord
 
   has_many :messages, dependent: :destroy
 
-  has_many :user_1_conversations, class_name: 'Conversation', foreign_key: 'user_1_id', dependent: :destroy
-  has_many :user_2_conversations, class_name: 'Conversation', foreign_key: 'user_2_id', dependent: :destroy
+  has_many :sent_contacts, class_name: 'Contact', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_contacts, class_name: 'Contact', foreign_key: 'receiver_id', dependent: :destroy
 
-  def conversations
-    Conversation.where 'user_1_id = :id or user_2_id = :id', id: self.id
+  def contacts
+    Contact.where 'sender_id = :id or receiver_id = :id', id: id
   end
 
-  def conversation_with user_id
-    self.conversations.find_by 'user_1_id = :id or user_2_id = :id', id: user_id
+  def contact_with(user_id)
+    contacts.find_by('receiver_id = :id OR sender_id = :id', id: user_id)
+  end
+
+  def confirmed_users
+    contacts.includes(%i[sender receiver]).confirmed.find_each.map do |contact|
+      contact.sender == self ? contact.receiver : contact.sender
+    end
   end
 
   def gravatar_url
-    "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email)}?s=40"
+    "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?s=40"
   end
 
   def name
+    return full_name if full_name.present?
     email.split('@')[0]
   end
 end
