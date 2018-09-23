@@ -33,7 +33,7 @@ gem 'webpacker', '~> 3.5'
 gem 'haml-rails'
 
 gem 'bootstrap', '~> 4.1'
-gem 'devise', path: '../devise'
+gem 'devise'
 gem 'figaro'
 
 group :development, :test do
