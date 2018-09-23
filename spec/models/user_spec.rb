@@ -7,6 +7,16 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
 
+  describe '#contacts' do
+    it "returns all of a user's contacts" do
+      user = create :user
+      sent_contacts = create_list :contact, 3, sender: user
+      received_contacts = create_list :contact, 3, receiver: user
+
+      expect(user.contacts.to_a.sort).to eq((sent_contacts + received_contacts).sort)
+    end
+  end
+
   describe 'User#conversations' do
     it 'should return all of a user\'s conversations' do
       user = create :user, :with_conversations

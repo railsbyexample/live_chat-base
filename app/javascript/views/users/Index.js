@@ -37,7 +37,7 @@ class Index extends React.Component {
         <ViewHeader title="Users">
           <LinkButton
             text="Invite"
-            href="/users"
+            href="/contacts/new"
             src={add_user_icon}
           />
         </ViewHeader>

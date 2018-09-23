@@ -30,8 +30,14 @@
     %>
 
     <% if notice && !notice.empty? %>
-    <div class="container my-2">
+    <div class="container py-2">
       <div class="alert alert-success mb-0"><%= notice %></div>
+    </div>
+    <% end %>
+
+    <% if alert && !alert.empty? %>
+    <div class="container py-2">
+      <div class="alert alert-danger mb-0"><%= alert %></div>
     </div>
     <% end %>
 

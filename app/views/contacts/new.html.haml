@@ -1,0 +1,10 @@
+.container
+  %h5 Add new contact
+
+  = form_tag '/contacts', method: 'post' do
+    .form-group
+      = label_tag :email
+      = email_field_tag 'contact[email]', '', class: 'form-control'
+
+    .form-group
+      = submit_tag 'Request contact', class: 'btn btn-primary btn-block'
