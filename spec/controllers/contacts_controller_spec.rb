@@ -1,48 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe ContactsController, type: :controller do
+  describe 'GET #index' do
+    let(:user) { create :user }
+    before(:each) { sign_in user }
 
-  # This should return the minimal set of attributes required to create a valid
-  # Contact. As you add validations to Contact, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ContactsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
-  describe "GET #index" do
-    it "returns a success response" do
-      Contact.create! valid_attributes
+    it 'returns a success response' do
       get :index, params: {}
       expect(response).to be_successful
     end
   end
 
-  describe "GET #show" do
-    it "returns a success response" do
-      contact = Contact.create! valid_attributes
-      get :show, params: {id: contact.to_param}
-      expect(response).to be_successful
-    end
-  end
+  describe 'GET #new' do
+    let(:user) { create :user }
+    before(:each) { sign_in user }
 
-  describe "GET #new" do
-    it "returns a success response" do
+    it 'returns a success response' do
       get :new, params: {}
       expect(response).to be_successful
     end
   end
 
-  describe "GET #edit" do
-    it "returns a success response" do
-      contact = Contact.create! valid_attributes
-      get :edit, params: {id: contact.to_param}
+  describe 'GET #edit' do
+    let(:user) { create :user }
+    before(:each) { sign_in user }
+
+    it 'returns a success response' do
+      contact = create :contact, sender: user
+      get :edit, params: { id: contact.to_param }
       expect(response).to be_successful
     end
   end
@@ -71,54 +56,85 @@ RSpec.describe ContactsController, type: :controller do
       let(:invalid_attributes) { { email: 'nonemail' } }
 
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {contact: invalid_attributes}
-        expect(response).to be_successful
+        post :create, params: { contact: invalid_attributes }
+        expect(response).to redirect_to(new_contact_url)
       end
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  describe 'PATCH #update' do
+    let(:user) { create :user }
+    let(:sender) { create :user }
+    let(:receiver) { create :user }
+    let!(:contact) { create :contact, sender: sender, receiver: receiver }
 
-      it "updates the requested contact" do
-        contact = Contact.create! valid_attributes
-        put :update, params: {id: contact.to_param, contact: new_attributes}
-        contact.reload
-        skip("Add assertions for updated state")
-      end
+    context "the contact's receiver is signed in" do
+      before(:each) { sign_in receiver }
 
-      it "redirects to the contact" do
-        contact = Contact.create! valid_attributes
-        put :update, params: {id: contact.to_param, contact: valid_attributes}
-        expect(response).to redirect_to(contact)
+      it 'confirms the requested contact' do
+        patch :update, params: { id: contact.to_param }
+        expect(contact.reload.confirmed?).to be(true)
       end
     end
 
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        contact = Contact.create! valid_attributes
-        put :update, params: {id: contact.to_param, contact: invalid_attributes}
-        expect(response).to be_successful
+    context "the contact's sender is signed in" do
+      before(:each) { sign_in sender }
+
+      it "doesn't confirm the contact" do
+        patch :update, params: { id: contact.to_param }
+        expect(contact.reload.confirmed?).to be(false)
+      end
+    end
+
+    context 'another user is signed in' do
+      before(:each) { sign_in user }
+
+      it "doesn't confirm the contact" do
+        patch :update, params: { id: contact.to_param }
+        expect(contact.reload.confirmed?).to be(false)
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested contact" do
-      contact = Contact.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: contact.to_param}
-      }.to change(Contact, :count).by(-1)
+  describe 'DELETE #destroy' do
+    let(:user) { create :user }
+    let(:sender) { create :user }
+    let(:receiver) { create :user }
+    let!(:contact) { create :contact, sender: sender, receiver: receiver }
+
+    context "the contact's sender is signed in" do
+      before(:each) { sign_in sender }
+
+      it 'destroys the requested contact' do
+        expect do
+          delete :destroy, params: { id: contact.to_param }
+        end.to change(Contact, :count).by(-1)
+      end
     end
 
-    it "redirects to the contacts list" do
-      contact = Contact.create! valid_attributes
-      delete :destroy, params: {id: contact.to_param}
-      expect(response).to redirect_to(contacts_url)
+    context "the contact's receiver is signed in" do
+      before(:each) { sign_in receiver }
+
+      it 'destroys the requested contact' do
+        expect {
+          delete :destroy, params: { id: contact.to_param }
+        }.to change(Contact, :count).by(-1)
+      end
+    end
+
+    context 'another user is signed in' do
+      before(:each) { sign_in user }
+
+      it "doesn't destroy the requested contact" do
+        expect {
+          delete :destroy, params: { id: contact.to_param }
+        }.to change(Contact, :count).by(0)
+      end
+
+      it 'redirects to the contacts list' do
+        delete :destroy, params: { id: contact.to_param }
+        expect(response).to redirect_to(contacts_url)
+      end
     end
   end
-
 end

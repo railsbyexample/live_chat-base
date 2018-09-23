@@ -63,20 +63,27 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
+    unless @contact.receiver == current_user
+      redirect_to contacts_url, alert: "You can't confirm your own invitation"
+      return
+    end
+
+    @contact.confirm
+
     respond_to do |format|
-      if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact }
-      else
-        format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to contacts_url, notice: 'Contact was successfully updated.' }
+      format.json { render :show, status: :ok, location: @contact }
     end
   end
 
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
+    unless @contact.sender == current_user || @contact.receiver == current_user
+      redirect_to contacts_url, alert: "You can't access this record"
+      return
+    end
+
     @contact.destroy
     respond_to do |format|
       format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }

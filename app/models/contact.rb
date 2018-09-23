@@ -11,11 +11,11 @@ class Contact < ApplicationRecord
     save
   end
 
-  private
-
   def confirmed?
     confirmed_at.present?
   end
+
+  private
 
   def confirmable?
     !confirmed? && valid?
