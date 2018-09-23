@@ -6,6 +6,7 @@
 
     <%= devise_error_messages! %>
 
+    <%= form_group :full_name, :text_field, f, autofocus: true %>
     <%= form_group :email, :email_field, f, autofocus: true %>
     <%= form_group :password, :password_field, f, autocomplete: "off" %>
     <%= form_group :password_confirmation, :password_field, f, autocomplete: "off" %>

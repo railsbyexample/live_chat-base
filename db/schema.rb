@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2016_12_17_020230) do
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
+    t.string "full_name"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

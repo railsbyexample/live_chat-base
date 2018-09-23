@@ -29,6 +29,7 @@ class User < ApplicationRecord
   end
 
   def name
+    return full_name if full_name.present?
     email.split('@')[0]
   end
 end
