@@ -1,0 +1,15 @@
+<%= react_component 'contacts/New',
+                    unconfirmed_sent_contacts: render(
+                      partial: 'contacts/contacts',
+                      formats: [:json],
+                      locals: { contacts: @unconfirmed_sent_contacts }
+                    ),
+                    unconfirmed_received_contacts: render(
+                      partial: 'contacts/contacts',
+                      formats: [:json],
+                      locals: { contacts: @unconfirmed_received_contacts }
+                    ),
+                    current_user_id: current_user.id,
+                    delete_icon: image_url('delete_icon.svg'),
+                    confirm_icon: image_url('confirm_icon.svg')
+%>

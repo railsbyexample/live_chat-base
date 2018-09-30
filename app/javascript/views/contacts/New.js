@@ -30,6 +30,20 @@ class New extends React.Component {
 
     return (
       <div className="container">
+        <h5>Add people</h5>
+        <form action="/contacts" method="post">
+          <input name="authenticity_token" type="hidden" value={Auth.getAuthenticityToken()} />
+          <div className="form-group">
+            <label htmlFor="contact[email]">Email</label>
+            <input name="contact[email]" type="email" className="form-control" />
+          </div>
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary btn-block">
+              Request contact
+            </button>
+          </div>
+        </form>
+
         {receivedContacts.length > 0 ? <h5>Pending your approval</h5> : null}
         {receivedContacts.map(contact => (
           <ThumbnailCard

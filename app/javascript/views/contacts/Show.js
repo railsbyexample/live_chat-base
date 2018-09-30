@@ -22,10 +22,10 @@ class Show extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEnter = this.handleEnter.bind(this)
     this.sendMessage = this.sendMessage.bind(this)
+    this.handleMessageReceived = this.handleMessageReceived.bind(this)
 
     this.state = {
       message: '',
-      messages: JSON.parse(this.props.messages),
       contact: JSON.parse(this.props.contact)
     }
   }
@@ -40,7 +40,7 @@ class Show extends React.Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('message-received', this.handleMessageReceived.bind(this))
+    Cable.subscriptions.remove(this.messagesSubscription)
   }
 
   handleChange({ target }) {
@@ -54,9 +54,11 @@ class Show extends React.Component {
   }
 
   handleMessageReceived(message) {
-    if (message.contact_id == this.props.contact_id) {
-      const messages = this.state.messages.concat(message)
-      this.setState({ messages })
+    if (message.contact_id == this.state.contact.id) {
+      const messages = this.state.contact.messages.concat(message)
+      const contact = Object.assign(this.state.contact, { messages })
+
+      this.setState({ contact })
       this.scrollRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }
@@ -70,7 +72,7 @@ class Show extends React.Component {
 
   sendMessage(message) {
     this.messagesSubscription.perform('send_message',
-      { body: this.state.message, contact_id: this.props.contact_id }
+      { body: this.state.message, contact_id: this.state.contact.id }
     )
   }
 
@@ -91,14 +93,14 @@ class Show extends React.Component {
         />
 
         {
-          this.state.messages.length === 0
+          this.state.contact.messages.length === 0
           ? <div className="alert alert-warning">
               <span>This is the beggining of your conversation with {<strong>{otherUser.name}</strong>}.</span>
             </div>
           : null
         }
 
-        {this.state.messages.map(message => (
+        {this.state.contact.messages.map(message => (
           <MessageBox
             key={message.id}
             imageUrl={message.user.gravatar_url}
