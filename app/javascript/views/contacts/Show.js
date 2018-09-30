@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Avatar, Card, Button, Form, Input } from 'antd';
 
 import Cable from '../../services/Cable'
+import CurrentUser from '../../services/CurrentUser'
 
 import AvatarHeader from '../../components/AvatarHeader'
 import MessageBox from '../../components/MessageBox'
@@ -26,7 +27,8 @@ class Show extends React.Component {
 
     this.state = {
       message: '',
-      contact: JSON.parse(this.props.contact)
+      contact: JSON.parse(this.props.contact),
+      current_user: JSON.parse(CurrentUser.getCurrentUser())
     }
   }
 
@@ -77,10 +79,10 @@ class Show extends React.Component {
   }
 
   render () {
-    let userMessageMargin = (message) => (message.user_id == this.props.current_user_id ? 'ml-5' : 'mr-5')
-    let userMessageBackground = (message) => (message.user_id == this.props.current_user_id ? { backgroundColor: '#eee' } : {})
+    let userMessageMargin = (message) => (message.user_id == this.state.current_user.id ? 'ml-5' : 'mr-5')
+    let userMessageBackground = (message) => (message.user_id == this.state.current_user.id ? { backgroundColor: '#eee' } : {})
 
-    const otherUser = this.state.contact.sender_id == this.props.current_user_id
+    const otherUser = this.state.contact.sender_id == this.state.current_user.id
       ? this.state.contact.receiver
       : this.state.contact.sender
 
@@ -105,7 +107,7 @@ class Show extends React.Component {
             key={message.id}
             imageUrl={message.user.gravatar_url}
             text={message.body}
-            received={!(message.user_id == this.props.current_user_id)}
+            received={!(message.user_id == this.state.current_user.id)}
           />
         ))}
 

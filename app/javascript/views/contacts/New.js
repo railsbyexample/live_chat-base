@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Cable from '../../services/Cable'
 import Auth from '../../services/Auth'
+import CurrentUser from '../../services/CurrentUser'
 
 import ViewHeader from '../../components/ViewHeader'
 import LinkButton from '../../components/LinkButton'
@@ -14,16 +15,17 @@ class New extends React.Component {
 
     this.state = {
       sentContacts: JSON.parse(this.props.unconfirmed_sent_contacts),
-      receivedContacts: JSON.parse(this.props.unconfirmed_received_contacts)
+      receivedContacts: JSON.parse(this.props.unconfirmed_received_contacts),
+      current_user: JSON.parse(CurrentUser.getCurrentUser())
     }
   }
 
   render () {
-    const { current_user_id, delete_icon } = this.props
+    const { delete_icon } = this.props
     const { sentContacts, receivedContacts } = this.state
 
     const otherUser = (contact) => {
-      return contact.sender_id == this.props.current_user_id
+      return contact.sender_id == this.state.current_user.id
       ? contact.receiver
       : contact.sender
     }

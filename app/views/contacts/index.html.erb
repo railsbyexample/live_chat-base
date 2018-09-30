@@ -4,7 +4,6 @@
                       formats: [:json],
                       locals: { contacts: @contacts, included: { contact: %i[last_message] } }
                     ),
-                    current_user_id: current_user.id,
                     add_user_icon: image_url('add_user_icon.svg'),
                     delete_icon: image_url('delete_icon.svg')
 %>
