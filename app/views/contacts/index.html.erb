@@ -1,7 +1,0 @@
-<%= react_component 'contacts/Index',
-                    contacts: render(
-                      partial: 'contacts/contacts',
-                      formats: [:json],
-                      locals: { contacts: @contacts, included: { contact: %i[last_message] } }
-                    )
-%>
