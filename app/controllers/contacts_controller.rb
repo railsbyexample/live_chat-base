@@ -15,8 +15,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/new
   def new
-    @unconfirmed_sent_contacts = current_user.contacts.unconfirmed.sent_by(current_user)
-    @unconfirmed_received_contacts = current_user.contacts.unconfirmed.received_by(current_user)
+    @unconfirmed_contacts = current_user.contacts.unconfirmed
   end
 
   # GET /contacts/1/edit

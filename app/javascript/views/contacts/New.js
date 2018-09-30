@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Cable from '../../services/Cable'
 import Auth from '../../services/Auth'
 import CurrentUser from '../../services/CurrentUser'
+import Icons from '../../services/Icons'
 
 import ViewHeader from '../../components/ViewHeader'
 import LinkButton from '../../components/LinkButton'
@@ -13,15 +14,17 @@ class New extends React.Component {
   constructor(props) {
     super(props)
 
+    const unconfirmed_contacts = JSON.parse(this.props.unconfirmed_contacts)
+    const current_user = JSON.parse(CurrentUser.getCurrentUser())
+
     this.state = {
-      sentContacts: JSON.parse(this.props.unconfirmed_sent_contacts),
-      receivedContacts: JSON.parse(this.props.unconfirmed_received_contacts),
-      current_user: JSON.parse(CurrentUser.getCurrentUser())
+      sentContacts: unconfirmed_contacts.filter(({ sender_id }) => sender_id === current_user.id),
+      receivedContacts: unconfirmed_contacts.filter(({ receiver_id }) => receiver_id === current_user.id),
+      current_user
     }
   }
 
   render () {
-    const { delete_icon } = this.props
     const { sentContacts, receivedContacts } = this.state
 
     const otherUser = (contact) => {
@@ -50,7 +53,6 @@ class New extends React.Component {
         {receivedContacts.map(contact => (
           <ThumbnailCard
             key={otherUser(contact).id}
-            deleteIcon={delete_icon}
             imageUrl={otherUser(contact).gravatar_url}
             title={otherUser(contact).name}
             description={otherUser(contact).email}
@@ -60,7 +62,7 @@ class New extends React.Component {
               <input name="_method" type="hidden" value="patch" />
               <input name="authenticity_token" type="hidden" value={Auth.getAuthenticityToken()} />
               <button type="submit" className="btn btn-clear">
-                <img src={this.props.confirm_icon} />
+                <img src={Icons.confirm_icon} />
               </button>
             </form>
           </ThumbnailCard>
@@ -70,7 +72,6 @@ class New extends React.Component {
         {sentContacts.map(contact => (
           <ThumbnailCard
             key={otherUser(contact).id}
-            deleteIcon={delete_icon}
             imageUrl={otherUser(contact).gravatar_url}
             title={otherUser(contact).name}
             description={otherUser(contact).email}

@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Avatar, Divider, Card, Button, Form, Input, Row, Col } from 'antd';
 
 import Cable from '../../services/Cable'
 import Auth from '../../services/Auth'
 import CurrentUser from '../../services/CurrentUser'
+import Icons from '../../services/Icons'
 
 import ViewHeader from '../../components/ViewHeader'
 import LinkButton from '../../components/LinkButton'
@@ -25,7 +25,6 @@ class Index extends React.Component {
   }
 
   render () {
-    const { add_user_icon, delete_icon } = this.props
     const { users } = this.state
 
     const senderString = (contact) => {
@@ -46,7 +45,7 @@ class Index extends React.Component {
           <LinkButton
             text="Add"
             href="/contacts/new"
-            src={add_user_icon}
+            src={Icons.add_user_icon}
           />
         </ViewHeader>
 
@@ -63,7 +62,6 @@ class Index extends React.Component {
           <div key={contact.id}>
             <ThumbnailCard
               key={contact.id}
-              deleteIcon={delete_icon}
               deleteAction={`/contacts/${contact.id}`}
               imageUrl={otherUser(contact).gravatar_url}
               title={otherUser(contact).name}

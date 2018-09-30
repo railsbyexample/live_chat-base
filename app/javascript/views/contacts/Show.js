@@ -4,6 +4,7 @@ import { Avatar, Card, Button, Form, Input } from 'antd';
 
 import Cable from '../../services/Cable'
 import CurrentUser from '../../services/CurrentUser'
+import Icons from '../../services/Icons'
 
 import AvatarHeader from '../../components/AvatarHeader'
 import MessageBox from '../../components/MessageBox'
@@ -125,7 +126,7 @@ class Show extends React.Component {
             />
 
             <button className="btn btn-underline" type="submit">
-              <img src={this.props.add_conversation_icon} />
+              <img src={Icons.add_conversation_icon} />
             </button>
           </form>
         </div>
