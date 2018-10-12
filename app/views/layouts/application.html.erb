@@ -14,7 +14,11 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:400,700" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="current_user" content="<%= render(partial: 'users/user', locals: { user: current_user }) %>">
+
+    <meta name="user_signed_in" content="<%= user_signed_in? %>">
+    <%- if user_signed_in? %>
+      <meta name="current_user" content="<%= render(partial: 'users/user', formats: [:json], locals: { user: current_user }) %>">
+    <% end %>
   </head>
 
   <body>

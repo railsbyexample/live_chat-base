@@ -7,9 +7,9 @@ import Images from '../services/Images'
 class Navbar extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      current_user: JSON.parse(CurrentUser.getCurrentUser())
-    }
+    const currentUserData = CurrentUser.getCurrentUser()
+    const currentUser = currentUserData ? JSON.parse(currentUserData) : null
+    this.state = { currentUser }
   }
 
   render() {
@@ -23,7 +23,7 @@ class Navbar extends React.Component {
             </a>
           </div>
 
-          {this.state.current_user
+          {this.state.currentUser
             ? <div className="d-flex justify-content-end">
                 <a href="/contacts" className={`btn btn-underline btn-underline-menu ${this.props.active === 'contacts/index' ? 'active' : ''}`} >
                   <img src={Icons.conversations_icon} style={{ width: '36px' }} />
@@ -34,7 +34,7 @@ class Navbar extends React.Component {
                   <span className="ml-1 d-none d-md-inline-block">People</span>
                 </a>
                 <a href="/users/edit" className={`btn btn-underline btn-underline-menu ${this.props.active === 'registrations/edit' ? 'active' : ''}`} >
-                  <img src={this.state.current_user.gravatar_url} className="avatar" style={{ width: '36px' }} />
+                  <img src={this.state.currentUser.gravatar_url} className="avatar" style={{ width: '36px' }} />
                 </a>
               </div>
             : <div className="col-6 col-md-6 d-flex justify-content-end align-items-center">
